@@ -1,0 +1,26 @@
+.brand-logo{
+  display: flex;
+  align-items: center;
+}
+
+.main-nav ul {
+  display: flex;
+  margin: 0;  padding: 0;
+  list-style: none;
+}
+
+.main-nav li {
+  font-size: 3rem;
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+}
+
+
+.main-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
+}

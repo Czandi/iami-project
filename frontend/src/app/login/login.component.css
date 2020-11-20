@@ -1,0 +1,51 @@
+.container{
+  padding: 40px 30px 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.form{
+  text-align: center;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  height: 60vh;
+  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
+}
+h1{
+  padding: 20px;
+}
+
+.input{
+  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
+  padding: 1.5rem;
+  margin: 3rem;
+}
+.form-grid {
+  display: grid;
+  margin-left: auto;
+  max-width: 60%;
+  margin-right: auto;
+
+}
+
+input-width{
+  width: 50%;
+}
+
+
+@media (max-width: 1200px) {
+  .form{
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .form{
+    width: 100%;
+  }
+  .form-grid{
+    max-width: 80%;
+  }
+}
+
