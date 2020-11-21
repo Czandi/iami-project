@@ -3,15 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NavComponent } from './nav/nav.component';
-import { LoginComponent } from './login/login.component';
+import { NavComponent } from './components/nav/nav.component';
+import { LoginComponent } from './components/login/login.component';
 import { MaterialModule} from "./material";
+import { appRoutingModule } from "./app.routing";
+import { TeacherHubComponent } from "./components/teacher-hub/teacher-hub.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    TeacherHubComponent
   ],
   exports: [
     MaterialModule
@@ -19,7 +22,8 @@ import { MaterialModule} from "./material";
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        MaterialModule
+        MaterialModule,
+        appRoutingModule
     ],
   providers: [],
   bootstrap: [AppComponent]
