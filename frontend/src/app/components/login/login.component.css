@@ -34,9 +34,8 @@ h1{
 }
 
 .login-validate-info{
-  color: firebrick;
+  color: lightcoral;
   text-align: left;
-  font-weight: bold;
   font-size: 1rem;
   padding: 5px;
 }
