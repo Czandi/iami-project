@@ -1,16 +1,28 @@
 <div class="container">
   <div class="form">
     <h1>Zaloguj się do naszej platformy</h1>
-    <form class="form-grid">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"  class="form-grid">
       <mat-form-field class="input-width">
-        <mat-label>Login</mat-label>
-        <input matInput/>
+        <mat-label>Login:</mat-label>
+        <input formControlName="username" matInput/>
       </mat-form-field>
 
       <mat-form-field class="input-width">
         <mat-label>Hasło</mat-label>
-        <input type="password" matInput/>
+        <input formControlName="password" type="password" matInput/>
+
       </mat-form-field>
+      <div *ngIf="submitted && f.username.errors">
+        <div class="login-validate-info" *ngIf="f.username.errors.required"> Wymagany jest login </div>
+      </div>
+      <div  *ngIf="submitted && f.password.errors">
+        <div class="login-validate-info" *ngIf="f.password.errors.required"> Wymagane jest hasło </div>
+      </div>
+
+      <button [disabled]="loading" mat-stroked-button color="primary" class="btn-form">
+        <span>Zaloguj</span>
+      </button>
     </form>
+
   </div>
 </div>

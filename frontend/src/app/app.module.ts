@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule} from "./material";
 import { appRoutingModule } from "./app.routing";
 import { TeacherHubComponent } from "./components/teacher-hub/teacher-hub.component";
+import {ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,13 +21,16 @@ import { TeacherHubComponent } from "./components/teacher-hub/teacher-hub.compon
   exports: [
     MaterialModule
   ],
-    imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        MaterialModule,
-        appRoutingModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    appRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

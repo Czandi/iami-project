@@ -33,6 +33,21 @@ h1{
 
 }
 
+.login-validate-info{
+  color: firebrick;
+  text-align: left;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 5px;
+}
+
+.btn-form{
+  width: 30%;
+  margin: auto;
+  color: #c6b497;
+  margin-top: 50px;
+}
+
 input-width{
   width: 50%;
 }
@@ -40,6 +55,9 @@ input-width{
 
 @media (max-width: 1200px) {
   .form{
+    width: 50%;
+  }
+  .btn-form{
     width: 50%;
   }
 }
