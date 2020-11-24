@@ -1,7 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 html, body { height: 100%; }
-
-
 
 *, *::before, *::after{
   box-sizing: border-box;
@@ -11,6 +10,6 @@ body{
   padding: 0;
   margin: 0;
   background-color: #34626c;
-  font-family: Playfair Display, serif;
+  font-family: Montserrat, serif;
   color: white;
 }
