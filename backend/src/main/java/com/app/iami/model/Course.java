@@ -1,12 +1,9 @@
 package com.app.iami.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -14,6 +11,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Course {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,22 +35,10 @@ public class Course {
     @JsonManagedReference
     private Set<Student> students;
 
-//    @OneToMany
-//    @JoinTable(
-//            name = "course_form",
-//            joinColumns = @JoinColumn(name = "id_course"),
-//            inverseJoinColumns = @JoinColumn(name = "id_checking_form"))
-//    @JsonManagedReference
-//    private Set<CheckingForm> checkingForms;
-
-    @ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "course_form",
-            joinColumns = @JoinColumn(name = "id_course"),
-            inverseJoinColumns = @JoinColumn(name = "id_checking_form"))
+    @OneToMany(mappedBy = "course")
     @JsonManagedReference
     private Set<CheckingForm> checkingForms;
 
-    private String date;
+    private Integer day;
 
 }

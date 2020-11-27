@@ -18,8 +18,8 @@ public class CheckingFormController {
         this.checkingFormService = checkingFormService;
     }
 
-    @GetMapping("/checking-forms")
-    public List<CheckingForm> getCheckingForms(){
-        return checkingFormService.getCheckingForms();
-    }
+//    @GetMapping("/checking-forms")
+//    public List<CheckingForm> getCheckingForms(){
+//        return checkingFormService.getCheckingForms();
+//    }
 }

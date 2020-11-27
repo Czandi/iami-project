@@ -40,9 +40,6 @@ public class AuthTokenFilter extends OncePerRequestFilter {
 
                 UserDetails userDetails = teacherDetailsService.loadUserByUsername(username);
 
-                System.out.println(userDetails.getPassword());
-                System.out.println(userDetails);
-
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -1,13 +1,15 @@
 package com.app.iami.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Grade {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,34 +2,32 @@ package com.app.iami.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Data
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Table(name = "checking_form")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CheckingForm {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
 
-    @ManyToMany(mappedBy = "checkingForms")
+    @ManyToOne
+    @JoinColumn(name = "id_course")
     @JsonBackReference
-    private Set<Course> courses;
+    private Course course;
 
-//    @JoinTable(
-//            name = "course_form",
-//            joinColumns = @JoinColumn(name = "id_checking_form"),
-//            inverseJoinColumns = @JoinColumn(name = "weight"))
-//    @Column(nullable = false)
-//    private Float weight;
-
-//    @OneToMany(mappedBy = "checkingForm")
-//    @JsonManagedReference
-//    Set<CourseForm> weight;
+    private Float weight;
 
 }
