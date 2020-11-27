@@ -18,4 +18,8 @@ public class StudentService {
     public List<Student> getStudents() {
         return studentRepository.findAll();
     }
+
+    public Student findById(Integer idStudent) {
+        return studentRepository.findById(idStudent).orElseThrow();
+    }
 }

@@ -90,6 +90,6 @@ public class AuthController {
         teacher.setRoles(roles);
         teacherRepository.save(teacher);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!" + teacher.getRoles()));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 }

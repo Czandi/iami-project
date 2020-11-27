@@ -18,4 +18,8 @@ public class SubjectService {
     public List<Subject> getSubjects(){
         return subjectRepository.findAll();
     }
+
+    public Subject findById(Integer idSubject) {
+        return subjectRepository.findById(idSubject).orElseThrow();
+    }
 }

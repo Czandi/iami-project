@@ -19,4 +19,8 @@ public class TeacherService {
     public List<Teacher> getTeachers() {
         return teacherRepository.findAll();
     }
+
+    public Teacher findById(Integer idTeacher) {
+        return teacherRepository.findById(idTeacher).orElseThrow();
+    }
 }
