@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute} from "@angular/router";
-import { FormBuilder, FormGroup, Validators} from "@angular/forms";
-import { first } from "rxjs/operators";
-
 import { AuthenticationService } from "../../services";
+import {TokenStorageService} from "../../services/token-storage-service";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-login',
@@ -11,53 +9,46 @@ import { AuthenticationService } from "../../services";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm: FormGroup;
-  loading = false;
-  submitted = false;
-  returnUrl: string;
-  error: string;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {
-    if (this.authenticationService.currentUserValue) {
-      this.router.navigate(['/dziennik']);
-    }
-  }
+  form: any = {};
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = 'nie dziala';
+  roles: string[] = [];
+  content: string;
+
+  constructor(private authService: AuthenticationService, private tokenStorage: TokenStorageService, private userService: UserService) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/login';
+    this.userService.getPublicContent().subscribe(
+      data => {
+        this.content = data;
+      },
+      err => {
+        this.content = JSON.parse(err.error).message;
+      }
+    );
   }
 
-  // getter to easy access form fields
-  get f() { return this.loginForm.controls; }
+  onSubmit(): void {
+    this.authService.login(this.form).subscribe(
+      data => {
+        this.tokenStorage.saveToken(data.accessToken);
+        this.tokenStorage.saveUser(data);
 
-  onSubmit() {
-    this.submitted = true;
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.roles = this.tokenStorage.getUser().roles;
+      },
+      err => {
+        this.errorMessage = err.message;
+        this.isLoginFailed = true;
+      }
+    );
+  }
 
-    if (this.loginForm.invalid) {
-      return;
-    }
-
-    this.loading = true;
-    this.authenticationService.login(this.f.username.value, this.f.password.value)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          this.error = error;
-          this.loading = false;
-        });
+  reloadPage(): void {
+    window.location.reload(false);
   }
 
 }

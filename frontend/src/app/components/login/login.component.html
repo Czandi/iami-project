@@ -1,28 +1,60 @@
 <div class="container">
   <div class="form">
     <h1>Zaloguj się do naszej platformy</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"  class="form-grid">
+    <form
+      *ngIf="!isLoggedIn"
+      (ngSubmit)="f.form.valid && onSubmit()"
+      #f="ngForm"
+      name="form"
+      class="form-grid">
       <mat-form-field class="input-width">
         <mat-label>Login:</mat-label>
-        <input formControlName="username" matInput/>
+        <input
+          name="username"
+          [(ngModel)]="form.username"
+          required
+          #username="ngModel"
+          matInput
+        />
       </mat-form-field>
 
       <mat-form-field class="input-width">
         <mat-label>Hasło:</mat-label>
-        <input formControlName="password" type="password" matInput/>
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="form.password"
+          required
+          #password="ngModel"
+          matInput
+        />
 
       </mat-form-field>
-      <div *ngIf="submitted && f.username.errors">
-        <div class="login-validate-info" *ngIf="f.username.errors.required"> Wymagany jest login </div>
+      <div *ngIf="f.submitted && username.invalid">
+        <div class="login-validate-info"> Wymagany jest login </div>
       </div>
-      <div  *ngIf="submitted && f.password.errors">
-        <div class="login-validate-info" *ngIf="f.password.errors.required"> Wymagane jest hasło </div>
+      <div  *ngIf="f.submitted && password.invalid">
+        <div class="login-validate-info"> Wymagane jest hasło </div>
       </div>
 
-      <button [disabled]="loading" mat-stroked-button color="primary" class="btn-form">
+      <button mat-stroked-button color="primary" class="btn-form">
         <span>Zaloguj</span>
       </button>
+
+      <div class="form-group">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          *ngIf="f.submitted && isLoginFailed"
+        >
+          Login failed: {{ errorMessage }}
+        </div>
+      </div>
+
     </form>
 
+    <a routerLink="/centrum-nauczyciela" mat-stroked-button color="primary" class="btn-form">
+      <span>teacher-hub</span>
+    </a>
   </div>
 </div>

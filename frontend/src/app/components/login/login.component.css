@@ -1,8 +1,4 @@
-.container{
-  padding: 40px 30px 30px;
-  margin-left: auto;
-  margin-right: auto;
-}
+
 .form{
   text-align: center;
   width: 30%;
@@ -16,6 +12,7 @@
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
   border: 1px solid #839b97;
 }
+
 h1{
   padding: 20px;
 }

@@ -8,15 +8,24 @@ import { LoginComponent } from './components/login/login.component';
 import { MaterialModule} from "./material";
 import { appRoutingModule } from "./app.routing";
 import { TeacherHubComponent } from "./components/teacher-hub/teacher-hub.component";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule} from "@angular/common/http";
+import { AddCourseComponent } from './components/teacher-hub/add-course/add-course.component';
+import { ListCourseComponent } from './components/teacher-hub/list-course/list-course.component';
+import { AddSubjectComponent } from './components/teacher-hub/add-subject/add-subject.component';
+import { SingleCourseComponent } from './components/teacher-hub/list-course/single-course/single-course.component';
+import {authInterceptorProviders} from "./helpers/auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     LoginComponent,
-    TeacherHubComponent
+    TeacherHubComponent,
+    AddCourseComponent,
+    ListCourseComponent,
+    AddSubjectComponent,
+    SingleCourseComponent
   ],
   exports: [
     MaterialModule
@@ -27,9 +36,11 @@ import { HttpClientModule} from "@angular/common/http";
     MaterialModule,
     appRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
+    authInterceptorProviders
   ],
   bootstrap: [AppComponent]
 })

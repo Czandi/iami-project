@@ -1,35 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from "rxjs";
+
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-  private currentUserSubject: BehaviorSubject<any>;
-  public currentUser: Observable<any>;
-  private API_URL: String = "https://localhost:4201";
+
+  private API_URL: String = "http://localhost:4201/api/auth/";
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<any>(JSON.parse(localStorage.getItem('currentUser')));
-    this.currentUser = this.currentUserSubject.asObservable();
+
   }
 
-  public get currentUserValue() {
-    return this.currentUserSubject.value;
+  login(credentials): Observable<any> {
+    return this.http.post(this.API_URL + 'signin',{
+      username: credentials.username,
+      password: credentials.password
+    }, httpOptions);
   }
 
-  login(username, password) {
-    return this.http.post<any>(`${this.API_URL}/users/authenticate`, { username, password })
-      .pipe(map(user => {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify(user));
-        this.currentUserSubject.next(user);
-        return user;
-      }));
-  }
-
-  logout() {
-    localStorage.removeItem('currentUser');
-    this.currentUserSubject.next(null);
-  }
 }

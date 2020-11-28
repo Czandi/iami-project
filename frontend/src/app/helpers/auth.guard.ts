@@ -1,24 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
+import {TokenStorageService} from "../services/token-storage-service";
+import {Observable} from "rxjs";
 
-import { AuthenticationService } from "../services";
+const TOKEN_HEADER_KEY = 'Authorization';
+
 
 @Injectable({ providedIn: 'root' })
-export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ) {}
+export class AuthGuard implements HttpInterceptor {
+  constructor(private token: TokenStorageService) { }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-      // authorised so return true
-      return true;
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let authReq = req;
+    const token = this.token.getToken();
+    if (token != null) {
+      authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
-
-    // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url }});
-    return false;
+    return next.handle(authReq);
   }
 }
+
+export const authInterceptorProviders = [
+  { provide: HTTP_INTERCEPTORS, useClass: AuthGuard, multi: true }
+];
+
