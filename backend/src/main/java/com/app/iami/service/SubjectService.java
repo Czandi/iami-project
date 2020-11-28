@@ -22,4 +22,12 @@ public class SubjectService {
     public Subject findById(Integer idSubject) {
         return subjectRepository.findById(idSubject).orElseThrow();
     }
+
+    public Subject insertSubject(String name) {
+        Subject subject = Subject.builder()
+                .name(name)
+                .build();
+
+        return subjectRepository.save(subject);
+    }
 }
