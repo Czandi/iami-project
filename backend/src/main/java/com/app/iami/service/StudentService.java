@@ -1,5 +1,6 @@
 package com.app.iami.service;
 
+import com.app.iami.model.Course;
 import com.app.iami.model.Student;
 import com.app.iami.payload.request.StudentRequest;
 import com.app.iami.repository.StudentRepository;
@@ -30,5 +31,9 @@ public class StudentService {
 
     public Student findByNameAndSurname(String name, String surname){
         return studentRepository.findByNameAndSurname(name, surname);
+    }
+
+    public List<Student> getStudentsByCourse(Course course) {
+        return studentRepository.findByCourses(course);
     }
 }

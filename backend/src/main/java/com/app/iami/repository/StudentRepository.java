@@ -12,9 +12,7 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-    @Query("Select s from Student s " +
-            "where ?1 member s.courses")
-    List<Student> findStudentsWithCourse(Course course);
-
     Student findByNameAndSurname(String name, String surname);
+
+    List<Student> findByCourses(Course course);
 }

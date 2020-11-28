@@ -75,7 +75,6 @@ public class AuthController {
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        // Create new user's account
         Teacher teacher = new Teacher(signUpRequest.getName(),
                 signUpRequest.getSurname(),
                 signUpRequest.getUsername(),

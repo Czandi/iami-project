@@ -10,16 +10,4 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-public class CheckingFormController {
-
-    private final CheckingFormService checkingFormService;
-
-    public CheckingFormController(CheckingFormService checkingFormService) {
-        this.checkingFormService = checkingFormService;
-    }
-
-//    @GetMapping("/checking-forms")
-//    public List<CheckingForm> getCheckingForms(){
-//        return checkingFormService.getCheckingForms();
-//    }
-}
+public class CheckingFormController {}

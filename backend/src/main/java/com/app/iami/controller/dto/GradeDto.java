@@ -12,7 +12,6 @@ import lombok.*;
 public class GradeDto {
 
     private Integer id;
-    private Student student;
     private CheckingForm checkingForm;
     private String grade;
 

@@ -1,14 +1,19 @@
 package com.app.iami.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.sun.istack.Nullable;
+import lombok.*;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Presence {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +29,6 @@ public class Presence {
 
     private boolean presence;
 
-    private Date date;
+    private LocalDate date;
 
 }
