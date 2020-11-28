@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from "../../services";
-import {TokenStorageService} from "../../services/token-storage-service";
-import {UserService} from "../../services/user.service";
+import { AuthenticationService } from '../../services';
+import { TokenStorageService } from '../../services/token-storage.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   form: any = {};
   isLoggedIn = false;
   isLoginFailed = false;
@@ -17,14 +16,18 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   content: string;
 
-  constructor(private authService: AuthenticationService, private tokenStorage: TokenStorageService, private userService: UserService) { }
+  constructor(
+    private authService: AuthenticationService,
+    private tokenStorage: TokenStorageService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.userService.getPublicContent().subscribe(
-      data => {
+      (data) => {
         this.content = data;
       },
-      err => {
+      (err) => {
         this.content = JSON.parse(err.error).message;
       }
     );
@@ -32,15 +35,16 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
-      data => {
-        this.tokenStorage.saveToken(data.accessToken);
+      (data) => {
+        console.log(data);
+        this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
       },
-      err => {
+      (err) => {
         this.errorMessage = err.message;
         this.isLoginFailed = true;
       }
@@ -50,5 +54,4 @@ export class LoginComponent implements OnInit {
   reloadPage(): void {
     window.location.reload(false);
   }
-
 }

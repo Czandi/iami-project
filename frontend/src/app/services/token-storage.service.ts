@@ -4,11 +4,10 @@ const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenStorageService {
-
-  constructor() { }
+  constructor() {}
 
   signOut(): void {
     window.sessionStorage.clear();
@@ -19,7 +18,8 @@ export class TokenStorageService {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  public getToken(): string {
+  //Jak zrobisz funkcje get, to mozesz odwolywac sie do tych wartosci za pomoca np objekt.token, a nie objekt.getToken()
+  public get token(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }
 

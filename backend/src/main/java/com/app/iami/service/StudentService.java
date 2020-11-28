@@ -1,6 +1,7 @@
 package com.app.iami.service;
 
 import com.app.iami.model.Student;
+import com.app.iami.payload.request.StudentRequest;
 import com.app.iami.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,13 @@ public class StudentService {
 
     public Student findById(Integer idStudent) {
         return studentRepository.findById(idStudent).orElseThrow();
+    }
+
+    public Student insertStudent(Student student) {
+        return studentRepository.save(student);
+    }
+
+    public Student findByNameAndSurname(String name, String surname){
+        return studentRepository.findByNameAndSurname(name, surname);
     }
 }

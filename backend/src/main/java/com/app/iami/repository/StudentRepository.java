@@ -16,4 +16,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
             "where ?1 member s.courses")
     List<Student> findStudentsWithCourse(Course course);
 
+    Student findByNameAndSurname(String name, String surname);
 }
