@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services';
 import { TokenStorageService } from '../../services/token-storage.service';
 import { UserService } from '../../services/user.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private tokenStorage: TokenStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.authService.login(this.form).subscribe(
       (data) => {
-        console.log(data);
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUser(data);
 
@@ -53,5 +54,9 @@ export class LoginComponent implements OnInit {
 
   reloadPage(): void {
     window.location.reload(false);
+  }
+
+  onTeacherHub() {
+    this.router.navigate(['/centrum-nauczyciela'])
   }
 }

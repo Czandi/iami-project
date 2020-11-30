@@ -4,6 +4,7 @@ import {CourseService} from "../../services/course.service";
 import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {Observable} from "rxjs";
 import {UserService} from "../../services/user.service";
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-teacher-hub',
@@ -70,9 +71,11 @@ export class TeacherHubComponent implements OnInit, DataSource<Course> {
   }
 
   content: string;
-  private tokenStorageService: any;
 
-  constructor(private courseService: CourseService, private userService: UserService) { }
+  constructor(
+    private courseService: CourseService,
+    private userService: UserService,
+    private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
     this.userService.getTeacherHub().subscribe(

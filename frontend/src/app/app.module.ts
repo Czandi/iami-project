@@ -16,6 +16,7 @@ import { AddSubjectComponent } from './components/teacher-hub/add-subject/add-su
 import { SingleCourseComponent } from './components/teacher-hub/list-course/single-course/single-course.component';
 import {authInterceptorProviders} from "./helpers/auth.guard";
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +42,7 @@ import {authInterceptorProviders} from "./helpers/auth.guard";
   ],
   providers: [
     authInterceptorProviders
+
   ],
   bootstrap: [AppComponent]
 })

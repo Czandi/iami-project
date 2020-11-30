@@ -21,7 +21,6 @@ export class UserService {
   getTeacherHub(): Observable<any> {
     let headers = new HttpHeaders();
 
-    console.log(this.tokenService.token);
 
     headers.append('Authorization', this.tokenService.token);
 
