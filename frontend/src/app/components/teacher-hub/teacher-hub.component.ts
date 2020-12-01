@@ -110,6 +110,7 @@ export class TeacherHubComponent implements OnInit, DataSource<Course> {
 
   onTeacherCourses() {
     this.router.navigate(['twoje-kursy'], {relativeTo: this.activatedRoute})
+    console.log(this.activatedRoute.firstChild.snapshot.routeConfig);
   }
 
   onAddCourse() {

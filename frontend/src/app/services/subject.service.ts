@@ -16,9 +16,9 @@ export class SubjectService {
 
   public addSubject(name: string): Observable<any> {
     if (name.length >= 4) {
-      return this.http.post(this.API_URL, {
+      return this.http.post(this.API_URL,
         name,
-      });
+      );
     }
   }
 

@@ -11,7 +11,6 @@ export class AddSubjectComponent implements OnInit {
   form: any = {};
   errorMessage: string;
   isSuccess: boolean = false;
-  @Input() input;
 
 
   constructor(
@@ -23,7 +22,7 @@ export class AddSubjectComponent implements OnInit {
 
   onSubmit() {
     this.subjectService.addSubject(this.form.name).subscribe(  (data) => {
-      if (data.name.length > 14){
+      if (data.name.length >= 4){
         this.isSuccess = true;
       }else{
         this.isSuccess = false;
