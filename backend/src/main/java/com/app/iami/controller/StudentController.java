@@ -1,11 +1,9 @@
 package com.app.iami.controller;
 
 import com.app.iami.model.Student;
+import com.app.iami.payload.request.StudentRequest;
 import com.app.iami.service.StudentService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +21,11 @@ public class StudentController {
     @GetMapping("/students")
     public List<Student> getStudents() {
         return studentService.getStudents();
+    }
+
+    @PostMapping("/students")
+    public Student insertStudent(@RequestBody StudentRequest student){
+        return studentService.insertNewStudent(student);
     }
 
 }

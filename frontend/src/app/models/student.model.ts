@@ -1,4 +1,4 @@
-import {Deserializable} from "./deserializable.model";
+import { Deserializable } from './deserializable.model';
 
 export class Student {
   public id: number;
@@ -8,5 +8,4 @@ export class Student {
   // deserialize(input: any): this {
   //   return Object.assign(this, input);
   // }
-
 }

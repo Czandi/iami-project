@@ -1,11 +1,57 @@
-.btn-hub{
-  width:10rem;
+.btn-hub {
+  width: 10rem;
   color: #c6b497;
   margin: 30px;
+  font-size: 12pt;
+  border: 1px solid#244850;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-.hub-nav{
+.btn-hub:hover {
+  cursor: pointer;
+}
+
+.hub-nav {
   display: flex;
   flex-wrap: wrap;
 }
 
+.nav-element {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.submenu {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 85px;
+  display: none;
+}
+
+.submenu.active {
+  display: block;
+}
+
+.btn-sub {
+  margin: 10px;
+  padding: 5px;
+}
+
+.btn-hub.active {
+  background-color: #244850;
+  color: white;
+}
+
+.active:hover {
+  color: white;
+}

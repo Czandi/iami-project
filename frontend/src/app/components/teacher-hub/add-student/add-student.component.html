@@ -2,35 +2,35 @@
   <div class="form">
     <form (ngSubmit)="onSubmit()" #f="ngForm" name="form" class="form-grid">
       <mat-form-field class="input-width">
-        <mat-label>Nazwa</mat-label>
+        <mat-label>Imie</mat-label>
         <input
           name="name"
           [(ngModel)]="form.name"
           required
           #name="ngModel"
-          minlength="4"
+          (change)="clearInfo()"
+          matInput
+        />
+      </mat-form-field>
+      <mat-form-field class="input-width">
+        <mat-label>Nazwisko</mat-label>
+        <input
+          name="name"
+          [(ngModel)]="form.surname"
+          required
+          #name="ngModel"
           (change)="clearInfo()"
           matInput
         />
       </mat-form-field>
 
       <button mat-stroked-button color="primary" class="btn-form">
-        <span>Dodaj przedmiot</span>
+        <span>Dodaj studenta</span>
       </button>
       <div class="form-group alert-box">
         <div *ngIf="f.submitted && name.invalid">
           <div class="alert alert-danger add-validate-info">
-            Wymagana jest nazwa
-          </div>
-        </div>
-        <div *ngIf="f.submitted && name.errors">
-          <div class="alert alert-danger add-validate-info">
-            Nazwa musi składać się z minimum 4 liter
-          </div>
-        </div>
-        <div *ngIf="f.submitted && nameExists">
-          <div class="alert alert-danger add-validate-info">
-            Nazwa już istnieje
+            Imię oraz nazwisko są wymagane
           </div>
         </div>
         <div *ngIf="f.submitted && isSuccess">
@@ -43,8 +43,10 @@
     <div class="overflowin-table">
       <mat-table class="table-custom" [dataSource]="dataSource">
         <ng-container matColumnDef="subjectNo">
-          <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
-          <mat-cell *matCellDef="let subject"> {{ subject.name }}</mat-cell>
+          <mat-header-cell *matHeaderCellDef>Student</mat-header-cell>
+          <mat-cell *matCellDef="let student">
+            {{ student.name + " " + student.surname }}</mat-cell
+          >
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

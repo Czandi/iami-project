@@ -60,15 +60,15 @@ public class CourseController {
         return courseService.getStudents(idCourse);
     }
 
-//    @PostMapping(value = "/courses/{id}/students", params = "student")
-//    public Student insertStudent(@PathVariable Integer id, @RequestBody StudentRequest student){
-//        return courseService.insertStudent(id, student);
-//    }
-
-    @PostMapping("/courses/{id}/students")
-    public List<Student> insertStudents(@PathVariable Integer id, @RequestBody List<StudentRequest> students){
-        return courseService.insertStudents(id, students);
+    @PostMapping(value = "/courses/{id}/students", params = "student")
+    public Student insertStudent(@PathVariable Integer id, @RequestBody StudentRequest student){
+        return courseService.insertStudent(id, student);
     }
+
+//    @PostMapping("/courses/{id}/students")
+//    public List<Student> insertStudents(@PathVariable Integer id, @RequestBody List<StudentRequest> students){
+//        return courseService.insertStudents(id, students);
+//    }
 
     @GetMapping("/courses/{id}/presences")
     public List<PresenceDto> getPresences(@PathVariable("id") Integer idCourse){

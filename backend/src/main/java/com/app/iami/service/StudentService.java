@@ -36,4 +36,13 @@ public class StudentService {
     public List<Student> getStudentsByCourse(Course course) {
         return studentRepository.findByCourses(course);
     }
+
+    public Student insertNewStudent(StudentRequest student) {
+        Student newStudent = Student.builder()
+                .name(student.getName())
+                .surname(student.getSurname())
+                .courses(null)
+                .build();
+        return insertStudent(newStudent);
+    }
 }
