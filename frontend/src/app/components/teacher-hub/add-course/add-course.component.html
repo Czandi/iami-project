@@ -1,6 +1,45 @@
 <div class="flex-system">
   <div class="form-hub-students">
-    add subject
-  </div>
+    <mat-form-field class="input-width">
+      <mat-label>Nazwa</mat-label>
+      <input
+        name="name"
+        [(ngModel)]="form.name"
+        required
+        #name="ngModel"
+        minlength="4"
+        (change)="clearInfo()"
+        matInput
+      />
+    </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Przedmiot</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let subject of subjectList" [value]="subject.name">
+          {{ subject.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select
+        [formControl]="studentsCtrl"
+        placeholder="Studenci"
+        [multiple]="true"
+      >
+        <mat-option>
+          <ngx-mat-select-search
+            [formControl]="studentsFilterCtrl"
+          ></ngx-mat-select-search>
+        </mat-option>
+        <mat-option
+          *ngFor="let student of filteredStudents | async"
+          [value]="student.name"
+        >
+          {{ student.name }} {{ student.surname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </div>
