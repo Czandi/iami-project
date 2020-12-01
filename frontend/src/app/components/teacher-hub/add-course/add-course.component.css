@@ -15,11 +15,17 @@
   align-items: center;
   font-size: 0.7rem;
   text-align: center;
-  width: 400px;
-  min-height: 70vh;
+  width: 30vw;
+  min-height: 60vh;
   transition: all .5s;
   overflow: hidden;
   color: #000;
   position: relative;
   margin:1rem;
+}
+
+.form-input{
+  margin-bottom: auto;
+  margin-top: 2rem;
+  font-size: 1rem;
 }

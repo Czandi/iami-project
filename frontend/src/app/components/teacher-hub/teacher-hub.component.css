@@ -1,0 +1,10 @@
+.btn-hub{
+  width:10rem;
+  color: #c6b497;
+  margin: 30px;
+}
+
+.hub-nav{
+  display: flex;
+  flex-wrap: wrap;
+}

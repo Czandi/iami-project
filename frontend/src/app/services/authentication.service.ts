@@ -29,8 +29,7 @@ export class AuthenticationService {
   }
 
   public isAuthenticated(): boolean{
-    const token = sessionStorage.getItem('auth-user');
-    return !token;
+    return !this.token.token;
   }
 
 }

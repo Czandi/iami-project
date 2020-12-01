@@ -5,6 +5,8 @@ import {CollectionViewer, DataSource} from "@angular/cdk/collections";
 import {Observable} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {TokenStorageService} from "../../services/token-storage.service";
+import {ActivatedRoute, Router} from "@angular/router";
+
 
 @Component({
   selector: 'app-teacher-hub',
@@ -75,7 +77,10 @@ export class TeacherHubComponent implements OnInit, DataSource<Course> {
   constructor(
     private courseService: CourseService,
     private userService: UserService,
-    private tokenStorageService: TokenStorageService) { }
+    private tokenStorageService: TokenStorageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
     this.userService.getTeacherHub().subscribe(
@@ -103,4 +108,15 @@ export class TeacherHubComponent implements OnInit, DataSource<Course> {
     this.tokenStorageService.signOut();
   }
 
+  onTeacherCourses() {
+    this.router.navigate(['twoje-kursy'], {relativeTo: this.activatedRoute})
+  }
+
+  onAddCourse() {
+    this.router.navigate(['dodaj-kurs'], {relativeTo: this.activatedRoute})
+  }
+
+  onAddSubject() {
+    this.router.navigate(['dodaj-przedmiot'], {relativeTo: this.activatedRoute})
+  }
 }

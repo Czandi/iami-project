@@ -25,7 +25,6 @@ public class SubjectController {
     }
 
     @PostMapping("/subjects")
-    public Subject insertSubject(@RequestBody String name) {
-        return subjectService.insertSubject(name);
+    public Subject insertSubject(@RequestBody String name) { return subjectService.insertSubject(name);
     }
 }

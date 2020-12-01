@@ -1,6 +1,44 @@
-<div class="flex-system">
-  <div class="form-hub-students">
-    add subject
+<div class="container">
+  <div class="form">
+    <form
+      (ngSubmit)=" onSubmit()"
+      #f="ngForm"
+      name="form"
+      class="form-grid">
+      <mat-form-field class="input-width">
+        <mat-label>Nazwa</mat-label>
+        <input
+          name="name"
+          [(ngModel)]="form.name"
+          required
+          #name="ngModel"
+          minlength="4"
+          (change)="clearInfo()"
+          matInput
+        />
+      </mat-form-field>
+
+      <button mat-stroked-button color="primary" class="btn-form">
+        <span>Dodaj przedmiot</span>
+      </button>
+      <div class="form-group">
+        <div *ngIf="f.submitted && name.invalid">
+          <div class="alert alert-danger add-validate-info"> Wymagana jest nazwa </div>
+        </div>
+        <div *ngIf="f.submitted && name.errors">
+          <div class="alert alert-danger add-validate-info"> Nazwa musi składać się z minimum 4 liter</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div *ngIf="f.submitted && isSuccess">
+          <div class="add-info"> Sukces</div>
+        </div>
+      </div>
+    </form>
+
+    <hr>
+
+
   </div>
 
 </div>

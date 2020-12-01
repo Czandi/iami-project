@@ -27,18 +27,11 @@ h1{
   margin-left: auto;
   max-width: 60%;
   margin-right: auto;
-
 }
 
-.login-validate-info{
-  color: lightcoral;
-  text-align: left;
-  font-size: 1rem;
-  padding: 5px;
-}
 
 .btn-form{
-  width: 30%;
+  width: fit-content;
   margin: auto;
   color: #c6b497;
   margin-top: 50px;
@@ -51,9 +44,6 @@ input-width{
 
 @media (max-width: 1200px) {
   .form{
-    width: 50%;
-  }
-  .btn-form{
     width: 50%;
   }
 }

@@ -43,18 +43,14 @@
 
       <div class="form-group">
         <div
-          class="alert alert-danger"
+          class="alert alert-danger login-validate-info"
           role="alert"
           *ngIf="f.submitted && isLoginFailed"
         >
-          Login failed: {{ errorMessage }}
+          {{ errorMessage }}
         </div>
       </div>
 
     </form>
-
-    <a (click)="onTeacherHub()" mat-stroked-button color="primary" class="btn-form">
-      <span>teacher-hub</span>
-    </a>
   </div>
 </div>

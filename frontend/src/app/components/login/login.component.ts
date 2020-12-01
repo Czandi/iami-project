@@ -44,19 +44,17 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
+        this.reloadPage();
       },
       (err) => {
-        this.errorMessage = err.message;
+        this.errorMessage = "Błędne dane logowania";
         this.isLoginFailed = true;
       }
     );
   }
 
   reloadPage(): void {
-    window.location.reload(false);
+    this.router.navigate(['/centrum-nauczyciela/twoje-kursy'])
   }
 
-  onTeacherHub() {
-    this.router.navigate(['/centrum-nauczyciela'])
-  }
 }

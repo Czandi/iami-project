@@ -1,9 +1,18 @@
 <div class="container">
   <div class="hub-nav">
-    <a routerLink="twoje-kursy">Twoje kursy</a>
-    <a routerLink="dodaj-kurs">Dodaj kurs</a>
-    <a routerLink="dodaj-przedmiot">Dodaj przedmiot</a>
-    <a routerLink="/login" (click)="logout()">Wyloguj</a>
+    <button (click)="onTeacherCourses()" mat-stroked-button color="primary" class="btn-hub">
+      <span>Twoje kursy</span>
+    </button>
+    <button (click)="onAddCourse()" mat-stroked-button color="primary" class="btn-hub">
+      <span>Dodaj kurs</span>
+    </button>
+    <button (click)="onAddSubject()" mat-stroked-button color="primary" class="btn-hub">
+      <span>Dodaj przedmiot</span>
+    </button>
+    <button (click)="logout()" mat-stroked-button color="primary" class="btn-hub">
+      <span>Wyloguj</span>
+    </button>
   </div>
   <router-outlet></router-outlet>
 </div>
+
