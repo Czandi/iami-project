@@ -50,6 +50,19 @@ input-width{
   margin: 15px;
 }
 
+.table-custom{
+  background-color: transparent;
+  width: 35%;
+  margin-left: auto;
+  margin-right: auto;
+  display: grid;
+  overflow: auto;
+}
+
+.overflowin-table{
+  overflow: auto;
+}
+
 .add-info{
   color: #49fa00;
   text-align: center;

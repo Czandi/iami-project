@@ -6,6 +6,7 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatDividerModule } from "@angular/material/divider";
 import { MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 
 
 
@@ -20,7 +21,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule,
+    NgxMatSelectSearchModule
   ],
   exports: [
     MatFormFieldModule,
@@ -31,7 +32,7 @@ import {MatSelectModule} from "@angular/material/select";
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule,
+    NgxMatSelectSearchModule
   ]
 })
 export class MaterialModule { }

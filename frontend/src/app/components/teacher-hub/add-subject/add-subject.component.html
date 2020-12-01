@@ -37,7 +37,18 @@
     </form>
 
     <hr>
+  <div class="overflowin-table">
+    <mat-table class="table-custom" [dataSource]="dataSource">
 
+      <ng-container matColumnDef="subjectNo">
+        <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
+        <mat-cell *matCellDef="let subject"> {{ subject.name }}</mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
 
   </div>
 
