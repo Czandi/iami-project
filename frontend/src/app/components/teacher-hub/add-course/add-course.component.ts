@@ -6,16 +6,34 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
+import {Course} from "../../../models/course.model";
+import {TokenStorageService} from "../../../services/token-storage.service";
+
+export enum Days {
+  poniedzialek,
+  wtorek,
+  środa,
+  czwartek,
+  piątek,
+  sobota,
+  niedziela
+}
+
 
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
   styleUrls: ['./add-course.component.css'],
 })
+
+
 export class AddCourseComponent implements OnInit, OnDestroy {
   public form: any = {};
   public subjectList;
   public studentsList;
+  public courseModel: {} = new Course;
+  enumDays = Days;
+
 
 
   public filteredStudents: ReplaySubject<Student[]> = new ReplaySubject<
@@ -24,14 +42,19 @@ export class AddCourseComponent implements OnInit, OnDestroy {
 
   public studentsCtrl: FormControl = new FormControl();
   public studentsFilterCtrl: FormControl = new FormControl();
+  public subjectCtrl: FormControl = new FormControl();
 
   private subjectSub: Subscription;
   private studentSub: Subscription;
   private _onDestroy = new Subject<void>();
 
+
+
+
   constructor(
     private subjectService: SubjectService,
-    private studentService: StudentService
+    private studentService: StudentService,
+    private tokenStorageService: TokenStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -78,12 +101,14 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   clearInfo() {}
 
   onSubmit() {
-    console.log(this.studentsFilterCtrl)
-    console.log(this.form.name)
-    console.log(this.studentsCtrl)
-    // this.courseModel = {
-    //   name: ,
-    //   id_teacher: ""
-    // }
+    this.courseModel = {
+      name: this.form.name,
+      idTeacher: this.tokenStorageService.getUser().id,
+      idSubject: this.subjectCtrl.value,
+
+    }
+    console.log(  this.enumDays);
   }
+
+
 }

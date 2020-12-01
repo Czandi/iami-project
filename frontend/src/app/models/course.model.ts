@@ -1,4 +1,3 @@
-import {Deserializable} from "./deserializable.model";
 import {Teacher} from "./teacher.model";
 import {Student} from "./student.model";
 import {CheckingForm} from "./checkingForm.model";
@@ -12,6 +11,7 @@ export class Course {
   public students: Student[];
   public checkingForms: CheckingForm[];
   public day: number;
+  public time: number;
 
   //TODO add serializable class to models
 

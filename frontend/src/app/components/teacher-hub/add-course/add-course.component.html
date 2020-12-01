@@ -20,8 +20,9 @@
 
     <mat-form-field>
       <mat-label>Przedmiot</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let subject of subjectList" [value]="subject.name">
+      <mat-select
+        [formControl]="subjectCtrl">
+        <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
           {{ subject.name }}
         </mat-option>
       </mat-select>
