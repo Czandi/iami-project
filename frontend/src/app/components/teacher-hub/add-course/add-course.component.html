@@ -1,5 +1,10 @@
-<div class="flex-system">
-  <div class="form-hub-students">
+<div class="container">
+  <div class="form">
+    <form
+      (ngSubmit)=" onSubmit()"
+      #f="ngForm"
+      name="form"
+      class="form-grid">
     <mat-form-field class="input-width">
       <mat-label>Nazwa</mat-label>
       <input
@@ -41,5 +46,9 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+      <button mat-stroked-button color="primary" class="btn-form">
+        <span>Dodaj kurs</span>
+      </button>
+    </form>
   </div>
 </div>

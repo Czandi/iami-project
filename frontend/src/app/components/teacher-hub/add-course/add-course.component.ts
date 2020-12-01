@@ -2,7 +2,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ReplaySubject, Subject } from 'rxjs';
 import { StudentService } from './../../../services/student.service';
 import { SubjectService } from './../../../services/subject.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
@@ -16,6 +16,7 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   public form: any = {};
   public subjectList;
   public studentsList;
+
 
   public filteredStudents: ReplaySubject<Student[]> = new ReplaySubject<
     Student[]
@@ -75,4 +76,14 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   }
 
   clearInfo() {}
+
+  onSubmit() {
+    console.log(this.studentsFilterCtrl)
+    console.log(this.form.name)
+    console.log(this.studentsCtrl)
+    // this.courseModel = {
+    //   name: ,
+    //   id_teacher: ""
+    // }
+  }
 }

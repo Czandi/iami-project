@@ -61,6 +61,7 @@ input-width{
 
 .overflowin-table{
   overflow: auto;
+  height: 60%;
 }
 
 .add-info{
