@@ -32,8 +32,6 @@ export class AddSubjectComponent implements OnInit {
       data.forEach((subject) => {
         this.subjectsNamesList.push(subject.name);
       });
-
-      console.log(this.subjectsNamesList);
     });
 
     this.dataSource = new SubjectDataSource(this.subjectService);

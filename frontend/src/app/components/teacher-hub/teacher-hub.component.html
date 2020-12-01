@@ -1,18 +1,45 @@
 <div class="container">
   <div class="hub-nav">
-    <button (click)="onTeacherCourses()" mat-stroked-button color="primary" class="btn-hub">
+    <a
+      (click)="onTeacherCourses(teacherCourses)"
+      color="primary"
+      class="btn-hub"
+      #teacherCourses
+    >
       <span>Twoje kursy</span>
-    </button>
-    <button (click)="onAddCourse()" mat-stroked-button color="primary" class="btn-hub">
+    </a>
+    <a (click)="onAddCourse(course)" color="primary" class="btn-hub" #course>
       <span>Dodaj kurs</span>
-    </button>
-    <button (click)="onAddSubject()" mat-stroked-button color="primary" class="btn-hub">
-      <span>Dodaj przedmiot</span>
-    </button>
-    <button (click)="logout()" mat-stroked-button color="primary" class="btn-hub">
+    </a>
+    <div class="nav-element">
+      <a
+        (click)="activeSubmenu(activateSubmenu)"
+        color="primary"
+        class="btn-hub btn-sub-main"
+        #activateSubmenu
+      >
+        <span>Dodaj</span>
+      </a>
+      <div class="submenu" #submenu>
+        <a
+          (click)="onAddSubject(addSubject)"
+          class="btn-hub btn-sub"
+          #addSubject
+        >
+          <span>Przedmiot</span>
+        </a>
+        <a
+          (click)="onAddStudent(addStudent)"
+          class="btn-hub btn-sub"
+          #addStudent
+        >
+          <span>Studenta</span>
+        </a>
+      </div>
+    </div>
+    <a (click)="logout()" color="primary" class="btn-hub">
       <span>Wyloguj</span>
-    </button>
+    </a>
   </div>
   <router-outlet></router-outlet>
 </div>
-

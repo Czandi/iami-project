@@ -15,6 +15,7 @@ import { ListCourseComponent } from './components/teacher-hub/list-course/list-c
 import { AddSubjectComponent } from './components/teacher-hub/add-subject/add-subject.component';
 import { SingleCourseComponent } from './components/teacher-hub/list-course/single-course/single-course.component';
 import { authInterceptorProviders } from './helpers/auth.guard';
+import { AddStudentComponent } from './components/teacher-hub/add-student/add-student.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { authInterceptorProviders } from './helpers/auth.guard';
     ListCourseComponent,
     AddSubjectComponent,
     SingleCourseComponent,
+    AddStudentComponent,
   ],
   exports: [MaterialModule],
   imports: [
