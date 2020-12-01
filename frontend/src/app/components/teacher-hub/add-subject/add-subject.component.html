@@ -1,10 +1,6 @@
 <div class="container">
   <div class="form">
-    <form
-      (ngSubmit)=" onSubmit()"
-      #f="ngForm"
-      name="form"
-      class="form-grid">
+    <form (ngSubmit)="onSubmit()" #f="ngForm" name="form" class="form-grid">
       <mat-form-field class="input-width">
         <mat-label>Nazwa</mat-label>
         <input
@@ -21,35 +17,39 @@
       <button mat-stroked-button color="primary" class="btn-form">
         <span>Dodaj przedmiot</span>
       </button>
-      <div class="form-group">
+      <div class="form-group alert-box">
         <div *ngIf="f.submitted && name.invalid">
-          <div class="alert alert-danger add-validate-info"> Wymagana jest nazwa </div>
+          <div class="alert alert-danger add-validate-info">
+            Wymagana jest nazwa
+          </div>
         </div>
         <div *ngIf="f.submitted && name.errors">
-          <div class="alert alert-danger add-validate-info"> Nazwa musi składać się z minimum 4 liter</div>
+          <div class="alert alert-danger add-validate-info">
+            Nazwa musi składać się z minimum 4 liter
+          </div>
         </div>
-      </div>
-      <div class="form-group">
+        <div *ngIf="f.submitted && nameExists">
+          <div class="alert alert-danger add-validate-info">
+            Nazwa już istnieje
+          </div>
+        </div>
         <div *ngIf="f.submitted && isSuccess">
-          <div class="add-info"> Sukces</div>
+          <div class="add-info">Sukces</div>
         </div>
       </div>
     </form>
 
-    <hr>
-  <div class="overflowin-table">
-    <mat-table class="table-custom" [dataSource]="dataSource">
+    <hr />
+    <div class="overflowin-table">
+      <mat-table class="table-custom" [dataSource]="dataSource">
+        <ng-container matColumnDef="subjectNo">
+          <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
+          <mat-cell *matCellDef="let subject"> {{ subject.name }}</mat-cell>
+        </ng-container>
 
-      <ng-container matColumnDef="subjectNo">
-        <mat-header-cell *matHeaderCellDef>Nazwa</mat-header-cell>
-        <mat-cell *matCellDef="let subject"> {{ subject.name }}</mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-    </mat-table>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
   </div>
-
-  </div>
-
 </div>
