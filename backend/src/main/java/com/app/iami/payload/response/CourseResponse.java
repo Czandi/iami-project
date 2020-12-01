@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -22,5 +21,6 @@ public class CourseResponse {
     private Set<Student> students;
     private Set<CheckingForm> checkingForms;
     private Integer day;
+    private String time;
 
 }

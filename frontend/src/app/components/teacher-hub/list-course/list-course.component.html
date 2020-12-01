@@ -1,6 +1,12 @@
-<div class="flex-system">
-  <div class="form-hub-students">
-    list of courses
+<div class="container">
+  <div class="container-content">
+    <div class="overflowin-table">
+      <div class="course" *ngFor="let course of coursesList">
+        <h1>{{ course.name }}</h1>
+        <p>{{ course.subject }}</p>
+        <p>{{ mapDay(course.day) }}</p>
+        <p>{{ course.time }}</p>
+      </div>
+    </div>
   </div>
-
 </div>

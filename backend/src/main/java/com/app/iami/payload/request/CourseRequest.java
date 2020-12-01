@@ -15,6 +15,7 @@ public class CourseRequest {
     private Integer idTeacher;
     private Integer idSubject;
     private Integer day;
+    private String time;
     private List<Integer> idStudents;
     private List<CheckingFormRequest> checkingForms;
 

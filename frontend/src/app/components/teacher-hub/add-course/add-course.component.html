@@ -1,52 +1,68 @@
 <div class="container">
-  <div class="form">
-    <form
-      (ngSubmit)=" onSubmit()"
-      #f="ngForm"
-      name="form"
-      class="form-grid">
-    <mat-form-field class="input-width">
-      <mat-label>Nazwa</mat-label>
+  <div class="container-content">
+    <form (ngSubmit)="onSubmit()" #f="ngForm" name="form" class="form-grid">
+      <mat-form-field class="input-width">
+        <mat-label>Nazwa</mat-label>
+        <input
+          name="name"
+          [(ngModel)]="form.name"
+          required
+          #name="ngModel"
+          minlength="4"
+          (change)="clearInfo()"
+          matInput
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Przedmiot</mat-label>
+        <mat-select required [formControl]="subjectCtrl">
+          <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
+            {{ subject.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Dzień</mat-label>
+        <mat-select required [formControl]="subjectCtrl">
+          <mat-option *ngFor="let day of daysList" [value]="day">
+            {{ day }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <input
-        name="name"
-        [(ngModel)]="form.name"
+        class="time-picker"
+        placeholder="Godzina*"
         required
-        #name="ngModel"
-        minlength="4"
-        (change)="clearInfo()"
-        matInput
+        [ngxTimepicker]="picker"
       />
-    </mat-form-field>
+      <ngx-material-timepicker #picker></ngx-material-timepicker>
 
-    <mat-form-field>
-      <mat-label>Przedmiot</mat-label>
-      <mat-select
-        [formControl]="subjectCtrl">
-        <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
-          {{ subject.name }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-select
-        [formControl]="studentsCtrl"
-        placeholder="Studenci"
-        [multiple]="true"
-      >
-        <mat-option>
-          <ngx-mat-select-search
-            [formControl]="studentsFilterCtrl"
-          ></ngx-mat-select-search>
-        </mat-option>
-        <mat-option
-          *ngFor="let student of filteredStudents | async"
-          [value]="student.name"
+      <mat-form-field>
+        <mat-select
+          required
+          [formControl]="studentsCtrl"
+          placeholder="Studenci"
+          [multiple]="true"
         >
-          {{ student.name }} {{ student.surname }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+          <mat-option>
+            <ngx-mat-select-search
+              placeholderLabel="Szukaj"
+              noEntriesFoundLabel="Nie znaleziono żadnego studenta"
+              [formControl]="studentsFilterCtrl"
+            ></ngx-mat-select-search>
+          </mat-option>
+          <mat-option
+            *ngFor="let student of filteredStudents | async"
+            [value]="student.name"
+          >
+            {{ student.name }} {{ student.surname }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
       <button mat-stroked-button color="primary" class="btn-form">
         <span>Dodaj kurs</span>
       </button>

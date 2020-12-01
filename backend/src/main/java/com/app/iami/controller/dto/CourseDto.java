@@ -15,9 +15,10 @@ public class CourseDto {
     private Integer id;
     private String name;
     private TeacherDto teacher;
-    private Subject subject;
+    private String subject;
     private Set<Student> students;
     private Set<CheckingForm> checkingForms;
     private Integer day;
+    private String time;
 
 }

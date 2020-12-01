@@ -25,10 +25,11 @@ public class CourseMapper {
                 .id(course.getId())
                 .name(course.getName())
                 .teacher(teacher)
-                .subject(course.getSubject())
+                .subject(course.getSubject().getName())
                 .students(course.getStudents())
                 .checkingForms(course.getCheckingForms())
                 .day(course.getDay())
+                .time(course.getTime())
                 .build();
     }
 

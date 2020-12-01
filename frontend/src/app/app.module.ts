@@ -16,6 +16,7 @@ import { AddSubjectComponent } from './components/teacher-hub/add-subject/add-su
 import { SingleCourseComponent } from './components/teacher-hub/list-course/single-course/single-course.component';
 import { authInterceptorProviders } from './helpers/auth.guard';
 import { AddStudentComponent } from './components/teacher-hub/add-student/add-student.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AddStudentComponent } from './components/teacher-hub/add-student/add-st
     appRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxMaterialTimepickerModule,
   ],
   providers: [authInterceptorProviders],
   bootstrap: [AppComponent],

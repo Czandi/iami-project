@@ -1,27 +1,17 @@
-
-.form{
-  text-align: center;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  height: 60vh;
-  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  border: 1px solid #839b97;
-}
-
-h1{
+h1 {
   padding: 20px;
 }
 
-.input{
-  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
+.input {
+  background: linear-gradient(
+    90deg,
+    rgba(207, 211, 206, 0.2721463585434174) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
   padding: 1.5rem;
   margin: 3rem;
 }
+
 .form-grid {
   display: grid;
   margin-left: auto;
@@ -30,19 +20,18 @@ h1{
   margin-top: 2rem;
 }
 
-
-.btn-form{
+.btn-form {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
   color: #c6b497;
 }
 
-input-width{
+input-width {
   width: 50%;
 }
 
-.add-validate-info{
+.add-validate-info {
   color: lightcoral;
   text-align: center;
   font-size: 1rem;
@@ -50,7 +39,7 @@ input-width{
   margin: 15px;
 }
 
-.table-custom{
+.table-custom {
   background-color: transparent;
   width: 35%;
   margin-left: auto;
@@ -59,12 +48,12 @@ input-width{
   overflow: auto;
 }
 
-.overflowin-table{
+.overflowin-table {
   overflow: auto;
   height: 60%;
 }
 
-.add-info{
+.add-info {
   color: #49fa00;
   text-align: center;
   font-size: 1rem;
@@ -72,18 +61,36 @@ input-width{
   margin: 15px;
 }
 
+.time-picker {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin: 25px 0;
+  font-size: 12pt;
+}
+
+.time-picker:focus {
+  outline: none;
+}
+
+::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 12pt;
+  margin: 0;
+  padding: 0;
+}
+
 @media (max-width: 1200px) {
-  .form{
+  .form {
     width: 50%;
   }
 }
 
 @media (max-width: 600px) {
-  .form{
+  .form {
     width: 100%;
   }
-  .form-grid{
+  .form-grid {
     max-width: 80%;
   }
 }
-

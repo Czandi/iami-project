@@ -2,39 +2,24 @@ import { takeUntil } from 'rxjs/operators';
 import { ReplaySubject, Subject } from 'rxjs';
 import { StudentService } from './../../../services/student.service';
 import { SubjectService } from './../../../services/subject.service';
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
-import {Course} from "../../../models/course.model";
-import {TokenStorageService} from "../../../services/token-storage.service";
-
-export enum Days {
-  poniedzialek,
-  wtorek,
-  środa,
-  czwartek,
-  piątek,
-  sobota,
-  niedziela
-}
-
+import { Course } from '../../../models/course.model';
+import { TokenStorageService } from '../../../services/token-storage.service';
 
 @Component({
   selector: 'app-add-course',
   templateUrl: './add-course.component.html',
   styleUrls: ['./add-course.component.css'],
 })
-
-
 export class AddCourseComponent implements OnInit, OnDestroy {
   public form: any = {};
   public subjectList;
   public studentsList;
-  public courseModel: {} = new Course;
-  enumDays = Days;
-
-
+  public courseModel: {} = new Course();
+  public daysList;
 
   public filteredStudents: ReplaySubject<Student[]> = new ReplaySubject<
     Student[]
@@ -48,13 +33,10 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   private studentSub: Subscription;
   private _onDestroy = new Subject<void>();
 
-
-
-
   constructor(
     private subjectService: SubjectService,
     private studentService: StudentService,
-    private tokenStorageService: TokenStorageService,
+    private tokenStorageService: TokenStorageService
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +55,16 @@ export class AddCourseComponent implements OnInit, OnDestroy {
           this.filterStudents();
         });
     });
+
+    this.daysList = [
+      'poniedziałek',
+      'wtorek',
+      'środa',
+      'czwartek',
+      'piątek',
+      'sobota',
+      'niedziela',
+    ];
   }
 
   filterStudents() {
@@ -105,10 +97,6 @@ export class AddCourseComponent implements OnInit, OnDestroy {
       name: this.form.name,
       idTeacher: this.tokenStorageService.getUser().id,
       idSubject: this.subjectCtrl.value,
-
-    }
-    console.log(  this.enumDays);
+    };
   }
-
-
 }

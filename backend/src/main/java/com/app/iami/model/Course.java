@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Entity
@@ -40,5 +41,7 @@ public class Course {
     private Set<CheckingForm> checkingForms;
 
     private Integer day;
+
+    private String time;
 
 }

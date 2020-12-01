@@ -72,12 +72,14 @@ public class CourseService {
 
         String name = newCourse.getName();
         Integer day = newCourse.getDay();
+        String time = newCourse.getTime();
 
         Course course = Course.builder()
                 .name(name)
                 .teacher(teacher)
                 .subject(subject)
                 .day(day)
+                .time(time)
                 .checkingForms(null)
                 .students(students)
                 .build();

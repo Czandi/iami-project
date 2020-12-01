@@ -1,12 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
-*, *::before, *::after{
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
-body{
+body {
   padding: 0;
   margin: 0;
   background-color: #34626c;
@@ -14,92 +19,65 @@ body{
   color: white;
 }
 
-.container{
+.container {
   padding: 40px 30px 30px;
   margin-left: auto;
   margin-right: auto;
-}
-
-
-.form-hub{
-  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  border: 1px solid #839b97;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.7rem;
-  text-align: center;
-  min-height: 70vh;
-  width: 1465px;
-  transition: all .5s;
-  overflow: hidden;
-  color: #000;
-  position: relative;
-  margin:1rem;
-}
-.form-hub-students{
-  background: linear-gradient(90deg, rgba(207,211,206,0.2721463585434174) 100%, rgba(0,212,255,1) 100%);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.16);
-  border: 1px solid #839b97;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.7rem;
-  text-align: center;
-  width: 300px;
-  min-height: 70vh;
-  transition: all .5s;
-  overflow: hidden;
-  color: #000;
-  position: relative;
-  margin:1rem;
 }
 
 table {
   width: 100%;
 }
 
-
-.flex-system{
+.flex-system {
   display: flex;
   flex-wrap: wrap;
 }
 
-.hub-nav{
+.hub-nav {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.hub-nav a{
+.hub-nav a {
   text-decoration: none;
   color: beige;
   padding: 20px;
   font-size: 1.3rem;
 }
 
-.hub-nav a:hover{
+.hub-nav a:hover {
   color: #c6b497;
   -webkit-transition: color 350ms linear;
   -ms-transition: color 350ms linear;
   transition: color 350ms linear;
 }
 
-.login-validate-info{
+.login-validate-info {
   color: lightcoral;
   text-align: left;
   font-size: 1rem;
   padding: 5px;
 }
 
-a:focus{
+a:focus {
   outline: none;
 }
 
-
+.container-content {
+  text-align: center;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+  height: 60vh;
+  background: linear-gradient(
+    90deg,
+    rgba(207, 211, 206, 0.2721463585434174) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #839b97;
+}
