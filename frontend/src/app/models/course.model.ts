@@ -1,7 +1,7 @@
-import {Teacher} from "./teacher.model";
-import {Student} from "./student.model";
-import {CheckingForm} from "./checkingForm.model";
-import {Subject} from "./subject.model";
+import { Teacher } from './teacher.model';
+import { Student } from './student.model';
+import { CheckingForm } from './checkingForm.model';
+import { Subject } from './subject.model';
 
 export class Course {
   public id: number;
@@ -23,5 +23,4 @@ export class Course {
   //   this.students = input.students.map( student => new Student().deserialize(student));
   //   return this;
   // }
-
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 const TOKEN_KEY = 'auth-token';
 const USER_KEY = 'auth-user';
@@ -8,13 +8,11 @@ const USER_KEY = 'auth-user';
   providedIn: 'root',
 })
 export class TokenStorageService {
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   signOut(): void {
     window.sessionStorage.clear();
-    this.router.navigate(['/login'])
+    this.router.navigate(['/login']);
   }
 
   public saveToken(token: string): void {
@@ -22,7 +20,6 @@ export class TokenStorageService {
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
 
-  //Jak zrobisz funkcje get, to mozesz odwolywac sie do tych wartosci za pomoca np objekt.token, a nie objekt.getToken()
   public get token(): string {
     return sessionStorage.getItem(TOKEN_KEY);
   }

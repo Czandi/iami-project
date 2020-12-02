@@ -2,24 +2,16 @@ h1 {
   padding: 20px;
 }
 
-
 .input {
-  background: linear-gradient(
-    90deg,
-    rgba(207, 211, 206, 0.2721463585434174) 100%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  padding: 1.5rem;
-  margin: 3rem;
+  color: black;
 }
 
-.checkingForms{
- display: grid;
+.checkingForms {
   justify-content: space-between;
-  grid-template-columns: repeat( auto-fit, minmax(140px, 140px) );
+  grid-template-columns: repeat(auto-fit, minmax(140px, 140px));
 }
 
-.input-width{
+.input-width {
   width: 100%;
 }
 
@@ -38,11 +30,10 @@ h1 {
   color: #c6b497;
 }
 
-.margin{
+.margin {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
-
 
 .add-validate-info {
   color: lightcoral;
@@ -82,8 +73,70 @@ h1 {
   font-size: 12pt;
 }
 
+.time-picker.ng-touched.ng-invalid,
+.name-input.ng-touched.ng-invalid,
+.weight-input.ng-touched.ng-invalid {
+  border-bottom: 1px solid rgba(255, 0, 0, 0.8);
+}
+
+.time-picker.ng-touched.ng-invalid::placeholder,
+.name-input.ng-touched.ng-invalid::placeholder,
+.weight-input.ng-touched.ng-invalid::placeholder {
+  color: rgba(255, 0, 0, 0.8);
+}
+
 .time-picker:focus {
   outline: none;
+}
+
+.form-name-input {
+  width: 50%;
+}
+
+.form-weight-input {
+  width: 35%;
+  margin-left: 20px;
+}
+
+.checking-form-container {
+  display: block;
+}
+
+.checking-form-record {
+  position: relative;
+  width: 300px;
+  height: 50px;
+  display: block;
+}
+
+.delete-button {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  right: 0;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
+.line {
+  width: 2px;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}
+
+.line:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.line:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 ::placeholder {
@@ -124,4 +177,16 @@ h1 {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #13262b;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

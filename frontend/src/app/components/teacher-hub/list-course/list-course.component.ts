@@ -1,4 +1,4 @@
-import { DateMapper } from './../../../shared/dayMapper';
+import { DateMapper } from '../../../shared/dateMapper';
 import { Subscription } from 'rxjs';
 import { CourseService } from './../../../services/course.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';

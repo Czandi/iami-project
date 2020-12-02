@@ -18,7 +18,7 @@ export class DateMapper {
     }
   }
 
-  public static mapDayToNumber(day: String): Number {
+  public static mapDayToNumber(day: String): number {
     switch (day) {
       case 'poniedziałek':
         return 0;

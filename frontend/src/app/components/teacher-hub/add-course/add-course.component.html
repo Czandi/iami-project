@@ -5,11 +5,9 @@
         <mat-label>Nazwa</mat-label>
         <input
           name="name"
-          [(ngModel)]="form.name"
+          class="input"
+          [formControl]="nameCtrl"
           required
-          #name="ngModel"
-          minlength="4"
-          (change)="clearInfo()"
           matInput
         />
       </mat-form-field>
@@ -25,7 +23,7 @@
 
       <mat-form-field>
         <mat-label>Dzień</mat-label>
-        <mat-select required [formControl]="subjectCtrl">
+        <mat-select required [formControl]="dayCtrl">
           <mat-option *ngFor="let day of daysList" [value]="day">
             {{ day }}
           </mat-option>
@@ -35,10 +33,11 @@
       <input
         class="time-picker"
         placeholder="Godzina*"
+        [formControl]="timeCtrl"
         required
         [ngxTimepicker]="picker"
       />
-      <ngx-material-timepicker #picker></ngx-material-timepicker>
+      <ngx-material-timepicker format="24" #picker></ngx-material-timepicker>
 
       <mat-form-field>
         <mat-select
@@ -63,32 +62,52 @@
         </mat-select>
       </mat-form-field>
 
-      <a (click)="addCheckingForm()" mat-stroked-button color="primary" class="btn-form">
+      <a
+        (click)="addCheckingForm()"
+        mat-stroked-button
+        color="primary"
+        class="btn-form"
+      >
         <span>Dodaj formę oceniania</span>
       </a>
-      <div [formGroup]="checkingFormGroup"  class="checkingForms overflowin-table" *ngIf="checkingForms.length > 0" >
-        <div style="display: contents" *ngFor="let cForm of checkingForms">
-      <mat-form-field
-        class="input-width"
+      <div
+        class="checkingForms overflowin-table"
+        *ngIf="checkingForms.length > 0"
       >
-        <mat-label>Nazwa</mat-label>
-        <input
-          name="name"
-          formControlName="name"
-          minlength="4"
-          (change)="clearInfo()"
-          matInput
-        />
-      </mat-form-field>
-        <mat-form-field class="input-width">
-          <mat-label>Waga</mat-label>
-          <input
-            name="weight"
-            formControlName="weight"
-            (change)="clearInfo()"
-            matInput
-          />
-        </mat-form-field>
+        <div
+          class="checking-form-container"
+          *ngFor="let cForm of checkingForms"
+        >
+          <div class="checking-form-record">
+            <mat-form-field class="form-name-input">
+              <mat-label>Nazwa</mat-label>
+              <input
+                [formControl]="cForm.nameForm"
+                class="input"
+                required
+                autocomplete="off"
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field class="form-weight-input">
+              <mat-label>Waga</mat-label>
+              <input
+                type="number"
+                class="input"
+                step=".01"
+                [formControl]="cForm.weightForm"
+                required
+                autocomplete="off"
+                matInput
+              />
+            </mat-form-field>
+
+            <div class="delete-button" (click)="deleteForm(cForm)">
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </div>
         </div>
       </div>
       <button mat-stroked-button color="primary" class="btn-form margin">
