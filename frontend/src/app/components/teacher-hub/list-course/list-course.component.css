@@ -1,26 +1,11 @@
-.form-hub-students {
-  background: linear-gradient(
-    90deg,
-    rgba(207, 211, 206, 0.2721463585434174) 100%,
-    rgba(0, 212, 255, 1) 100%
-  );
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
-  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
-  border: 1px solid #839b97;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 0.7rem;
-  text-align: center;
-  width: 300px;
-  min-height: 70vh;
-  transition: all 0.5s;
-  overflow: hidden;
-  color: #000;
-  position: relative;
+.btn-hub{
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem;
   margin: 1rem;
+}
+.btn-hub:hover {
+  cursor: pointer;
 }
 
 .content {
@@ -31,5 +16,4 @@
 .overflowin-table {
   overflow: auto;
   height: 100%;
-  width: 100%;
 }

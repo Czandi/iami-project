@@ -6,16 +6,18 @@ import { TeacherHubComponent } from './components/teacher-hub/teacher-hub.compon
 import { ListCourseComponent } from './components/teacher-hub/list-course/list-course.component';
 import { AddCourseComponent } from './components/teacher-hub/add-course/add-course.component';
 import { AddSubjectComponent } from './components/teacher-hub/add-subject/add-subject.component';
-import { AuthGuardGondekGuard } from './services/auth-guard-gondek.guard';
+import { AuthGuardGuard } from './services/auth-guard.guard';
+import {SingleCourseComponent} from "./components/teacher-hub/list-course/single-course/single-course.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'centrum-nauczyciela',
     component: TeacherHubComponent,
-    canActivate: [AuthGuardGondekGuard],
+    canActivate: [AuthGuardGuard],
     children: [
       { path: 'twoje-kursy', component: ListCourseComponent },
+      { path: 'twoje-kursy/:id', component: SingleCourseComponent },
       { path: 'dodaj-kurs', component: AddCourseComponent },
       { path: 'dodaj-przedmiot', component: AddSubjectComponent },
       { path: 'dodaj-studenta', component: AddStudentComponent },

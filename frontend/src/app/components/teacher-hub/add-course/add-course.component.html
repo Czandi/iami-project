@@ -9,12 +9,13 @@
           [formControl]="nameCtrl"
           required
           matInput
+          (change)="clearInfo()"
         />
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Przedmiot</mat-label>
-        <mat-select required [formControl]="subjectCtrl">
+        <mat-select (change)="clearInfo()" required [formControl]="subjectCtrl">
           <mat-option *ngFor="let subject of subjectList" [value]="subject.id">
             {{ subject.name }}
           </mat-option>
@@ -23,7 +24,7 @@
 
       <mat-form-field>
         <mat-label>Dzień</mat-label>
-        <mat-select required [formControl]="dayCtrl">
+        <mat-select (change)="clearInfo()" required [formControl]="dayCtrl">
           <mat-option *ngFor="let day of daysList" [value]="day">
             {{ day }}
           </mat-option>
@@ -36,6 +37,7 @@
         [formControl]="timeCtrl"
         required
         [ngxTimepicker]="picker"
+        (change)="clearInfo()"
       />
       <ngx-material-timepicker format="24" #picker></ngx-material-timepicker>
 
@@ -109,6 +111,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div *ngIf="f.submitted && isSuccess">
+        <div class="add-info">Sukces</div>
       </div>
       <button mat-stroked-button color="primary" class="btn-form margin">
         <span>Dodaj kurs</span>

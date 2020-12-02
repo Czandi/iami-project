@@ -58,10 +58,6 @@ export class TeacherHubComponent implements OnInit, DataSource<Course> {
 
   disconnect(collectionViewer: CollectionViewer): void {}
 
-  // public getCourse(){
-  //   this.courses = this.courseService.getCourse();
-  // }
-
   logout(): void {
     this.tokenStorageService.signOut();
   }

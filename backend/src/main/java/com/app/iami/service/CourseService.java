@@ -222,4 +222,5 @@ public class CourseService {
     public List<PresenceDto> insertPresencesForStudents(Integer idCourse, List<PresenceRequest> presences) {
         return presences.stream().map(presence -> insertPresenceForStudent(idCourse, presence)).collect(Collectors.toList());
     }
+
 }

@@ -4,6 +4,8 @@ import com.app.iami.controller.dto.CourseDto;
 import com.app.iami.controller.dto.GradeDto;
 import com.app.iami.controller.dto.PresenceDto;
 import com.app.iami.controller.dto.StudentDto;
+import com.app.iami.controller.mapper.CourseMapper;
+import com.app.iami.model.Course;
 import com.app.iami.model.Student;
 import com.app.iami.payload.request.CourseRequest;
 import com.app.iami.payload.request.GradeRequest;
@@ -40,6 +42,10 @@ public class CourseController {
         return courseService.insertCourse(newCourse);
     }
 
+    @GetMapping("courses/{id}")
+    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
+        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
+    }
 //    @GetMapping("/courses/{id}/grades")
 //    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){
 //        return courseService.getAllGradesFromCourse(idCourse);

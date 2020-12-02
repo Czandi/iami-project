@@ -22,7 +22,6 @@
 .hub-nav {
   display: flex;
   flex-wrap: wrap;
-  height: 100px;
 }
 
 .nav-element {

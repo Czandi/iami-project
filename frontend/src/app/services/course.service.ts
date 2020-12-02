@@ -17,6 +17,11 @@ export class CourseService {
     return this.http.get(this.API_URL);
   }
 
+  public getCoursesById(id: string): Observable<any>{
+    return this.http.get(this.API_URL + '/' + id);
+      // .map((res: Response) => res.json().response.map((course: Course) => new Course().deserialize(course)));
+  }
+
   public addCourse(course: CourseRequest): Observable<any> {
     return this.http.post(this.API_URL, course);
   }

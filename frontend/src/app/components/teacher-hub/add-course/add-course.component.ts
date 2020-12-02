@@ -26,6 +26,7 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   public checkingFormsList: [];
   public daysList;
   public checkingForms: any = [];
+  public isSuccess: boolean = false;
 
   public filteredStudents: ReplaySubject<Student[]> = new ReplaySubject<
     Student[]
@@ -109,7 +110,9 @@ export class AddCourseComponent implements OnInit, OnDestroy {
     this.studentSub.unsubscribe();
   }
 
-  clearInfo() {}
+  clearInfo() {
+    this.isSuccess = false;
+  }
 
   onSubmit() {
     if (this.checkInputs()) {
@@ -120,6 +123,7 @@ export class AddCourseComponent implements OnInit, OnDestroy {
       let students = this.studentsCtrl.value;
       let checkingForms = this.getCheckingFormsValues();
       let teacher = this.tokenStorageService.getUser().id;
+      this.isSuccess = true;
 
       let course = new CourseRequest();
       course.day = DateMapper.mapDayToNumber(day);

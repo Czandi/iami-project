@@ -81,3 +81,18 @@ a:focus {
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
   border: 1px solid #839b97;
 }
+
+@media (max-width: 1200px) {
+  .container-content {
+    width: 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .container-content {
+    width: 100%;
+  }
+  .form-grid {
+    max-width: 80%;
+  }
+}
