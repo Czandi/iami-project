@@ -1,7 +1,7 @@
 <div class="container">
   <div class="container-content">
     <form (ngSubmit)="onSubmit()" #f="ngForm" name="form" class="form-grid">
-      <mat-form-field class="input-width">
+      <mat-form-field>
         <mat-label>Nazwa</mat-label>
         <input
           name="name"
@@ -56,14 +56,42 @@
           </mat-option>
           <mat-option
             *ngFor="let student of filteredStudents | async"
-            [value]="student.name"
+            [value]="student.id"
           >
             {{ student.name }} {{ student.surname }}
           </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-stroked-button color="primary" class="btn-form">
+      <a (click)="addCheckingForm()" mat-stroked-button color="primary" class="btn-form">
+        <span>Dodaj formę oceniania</span>
+      </a>
+      <div [formGroup]="checkingFormGroup"  class="checkingForms overflowin-table" *ngIf="checkingForms.length > 0" >
+        <div style="display: contents" *ngFor="let cForm of checkingForms">
+      <mat-form-field
+        class="input-width"
+      >
+        <mat-label>Nazwa</mat-label>
+        <input
+          name="name"
+          formControlName="name"
+          minlength="4"
+          (change)="clearInfo()"
+          matInput
+        />
+      </mat-form-field>
+        <mat-form-field class="input-width">
+          <mat-label>Waga</mat-label>
+          <input
+            name="weight"
+            formControlName="weight"
+            (change)="clearInfo()"
+            matInput
+          />
+        </mat-form-field>
+        </div>
+      </div>
+      <button mat-stroked-button color="primary" class="btn-form margin">
         <span>Dodaj kurs</span>
       </button>
     </form>

@@ -4,10 +4,11 @@ import { StudentService } from './../../../services/student.service';
 import { SubjectService } from './../../../services/subject.service';
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { FormControl } from '@angular/forms';
+import {Form, FormControl, FormGroup} from '@angular/forms';
 import { Student } from 'src/app/models/student.model';
 import { Course } from '../../../models/course.model';
 import { TokenStorageService } from '../../../services/token-storage.service';
+import {CheckingForm} from "../../../models/checkingForm.model";
 
 @Component({
   selector: 'app-add-course',
@@ -19,7 +20,9 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   public subjectList;
   public studentsList;
   public courseModel: {} = new Course();
+  public checkingFormsList: [];
   public daysList;
+  public checkingForms: CheckingForm[] = [];
 
   public filteredStudents: ReplaySubject<Student[]> = new ReplaySubject<
     Student[]
@@ -28,6 +31,7 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   public studentsCtrl: FormControl = new FormControl();
   public studentsFilterCtrl: FormControl = new FormControl();
   public subjectCtrl: FormControl = new FormControl();
+  public checkingFormGroup: FormGroup;
 
   private subjectSub: Subscription;
   private studentSub: Subscription;
@@ -65,6 +69,11 @@ export class AddCourseComponent implements OnInit, OnDestroy {
       'sobota',
       'niedziela',
     ];
+
+    this.checkingFormGroup = new FormGroup({
+      name: new FormControl(),
+      weight: new FormControl()
+    });
   }
 
   filterStudents() {
@@ -93,10 +102,16 @@ export class AddCourseComponent implements OnInit, OnDestroy {
   clearInfo() {}
 
   onSubmit() {
+    console.log(this.checkingFormGroup.value);
+
     this.courseModel = {
       name: this.form.name,
       idTeacher: this.tokenStorageService.getUser().id,
       idSubject: this.subjectCtrl.value,
     };
+  }
+
+  addCheckingForm() {
+    this.checkingForms.push(new CheckingForm());
   }
 }
