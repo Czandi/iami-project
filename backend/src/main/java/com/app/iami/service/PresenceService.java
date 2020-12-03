@@ -17,7 +17,7 @@ public class PresenceService {
     }
 
     public List<Presence> findByCourse(Course course){
-        return presenceRepository.findByCourse(course);
+        return presenceRepository.findByCourseOrderByDate(course);
     }
 
     public Presence insertPresence(Presence presence) {
