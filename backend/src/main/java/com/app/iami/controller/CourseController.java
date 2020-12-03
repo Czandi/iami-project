@@ -12,6 +12,7 @@ import com.app.iami.payload.request.GradeRequest;
 import com.app.iami.payload.request.PresenceRequest;
 import com.app.iami.payload.request.StudentRequest;
 import com.app.iami.payload.response.CourseResponse;
+import com.app.iami.payload.response.PresenceResponse;
 import com.app.iami.service.CheckingFormService;
 import com.app.iami.service.CourseService;
 import org.springframework.web.bind.annotation.*;
@@ -46,10 +47,10 @@ public class CourseController {
     public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
         return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
     }
-//    @GetMapping("/courses/{id}/grades")
-//    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){
-//        return courseService.getAllGradesFromCourse(idCourse);
-//    }
+    @GetMapping("/courses/{id}/grades")
+    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){
+        return courseService.getAllGradesFromCourse(idCourse);
+    }
 
 //    @PostMapping(value = "/courses/{id}/grades", params = "grade")
 //    public GradeDto insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody GradeRequest grade){
@@ -87,7 +88,7 @@ public class CourseController {
 //    }
 
     @PostMapping(value = "/courses/{id}/presences")
-    public List<PresenceDto> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
+    public List<PresenceResponse> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
         return courseService.insertPresencesForStudents(idCourse, presences);
     }
 }

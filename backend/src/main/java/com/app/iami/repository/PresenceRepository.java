@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface PresenceRepository extends JpaRepository<Presence, Integer> {
 
-    List<Presence> findByCourse(Course course);
+    List<Presence> findByCourseOrderByDate(Course course);
 
 }

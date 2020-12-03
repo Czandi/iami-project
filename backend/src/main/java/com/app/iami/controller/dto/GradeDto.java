@@ -1,7 +1,6 @@
 package com.app.iami.controller.dto;
 
 import com.app.iami.model.CheckingForm;
-import com.app.iami.model.Student;
 import lombok.*;
 
 @Getter

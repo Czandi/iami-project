@@ -11,6 +11,7 @@ import com.app.iami.controller.mapper.StudentMapper;
 import com.app.iami.model.*;
 import com.app.iami.payload.request.*;
 import com.app.iami.payload.response.CourseResponse;
+import com.app.iami.payload.response.PresenceResponse;
 import com.app.iami.payload.response.TeacherResponse;
 import com.app.iami.repository.*;
 import org.springframework.stereotype.Service;
@@ -202,7 +203,8 @@ public class CourseService {
         return PresenceMapper.mapToPresenceDtos(presences);
     }
 
-    public PresenceDto insertPresenceForStudent(Integer idCourse, PresenceRequest p) {
+
+    public PresenceResponse insertPresenceForStudent(Integer idCourse, PresenceRequest p) {
 
         Course course = findById(idCourse);
         Student student = studentService.findById(p.getIdStudent());
@@ -216,10 +218,10 @@ public class CourseService {
 
         presence = presenceService.insertPresence(presence);
 
-        return PresenceMapper.mapToPresenceDto(presence);
+        return PresenceMapper.mapToPresenceResponse(presence);
     }
 
-    public List<PresenceDto> insertPresencesForStudents(Integer idCourse, List<PresenceRequest> presences) {
+    public List<PresenceResponse> insertPresencesForStudents(Integer idCourse, List<PresenceRequest> presences) {
         return presences.stream().map(presence -> insertPresenceForStudent(idCourse, presence)).collect(Collectors.toList());
     }
 
