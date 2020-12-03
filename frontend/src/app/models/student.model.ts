@@ -1,12 +1,6 @@
-import { Deserializable } from './deserializable.model';
 
-export class Student implements Deserializable{
+export class Student {
   public id: number;
   public name: string;
   public surname: string;
-
-  deserialize(input: any): this {
-    return Object.assign(this, input);
-    return this;
-  }
 }

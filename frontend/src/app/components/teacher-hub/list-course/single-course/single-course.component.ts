@@ -3,6 +3,7 @@ import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CourseService} from "../../../../services/course.service";
 import {FormControl} from "@angular/forms";
+import {Presence} from "../../../../models/presence.model";
 
 
 
@@ -17,6 +18,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
   public course: any;
   public dateList: any = ['init'];
   public checkboxForms: any = [];
+  public presence: Presence [] = [];
 
 
   constructor(
@@ -33,7 +35,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
         this.course = data;
         for (let i=0; i<this.course.students.length; i++){
           this.checkboxForms.push({
-            bool: new FormControl()
+            bool: new FormControl(false)
           });
         }
       });
@@ -53,11 +55,14 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
   }
 
   checkPost() {
-
     for (let i=0; i<this.course.students.length; i++){
-      console.log(this.checkboxForms[i].bool.value);
+      let tempPresence = new Presence();
+      tempPresence.idStudent = this.course.students[i].id;
+      tempPresence.presence = this.checkboxForms[i].bool.value;
+      this.presence.push(tempPresence);
     }
-
+    console.log(this.presence);
+    this.courseService.addPresence(this.id_course, this.presence).subscribe();
   }
 
 }
