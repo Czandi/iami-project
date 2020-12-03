@@ -1,6 +1,26 @@
-{{ course.name }}
-{{ course.teacher.name }}
-{{ course.teacher.surname}}
-{{ course.time }}
-{{ course.day }}
-{{ course.subject}}
+<div class="flex-system">
+
+  <div class="container-content-small">
+    <form action="">
+    <table>
+      <tr>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Obecność</th>
+      </tr>
+      <tr *ngFor="let cF of checkboxForms, let i=index">
+        <td> {{ course.students[i].name }}</td>
+        <td> {{ course.students[i].surname }}</td>
+        <td>
+          <mat-checkbox [formControl]="cF.bool" class="example-margin"></mat-checkbox>
+        </td>
+      </tr>
+    </table>
+
+    <div (click)="checkPost()" class="btn-hub">
+      Zatwierdź
+    </div>
+    </form>
+  </div>
+
+</div>

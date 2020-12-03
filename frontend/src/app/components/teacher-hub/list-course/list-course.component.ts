@@ -24,7 +24,6 @@ export class ListCourseComponent implements OnInit, OnDestroy {
       .getCourses()
       .subscribe((data) => {
         this.coursesList = data;
-        console.log(data);
       });
   }
 

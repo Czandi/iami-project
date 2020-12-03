@@ -7,6 +7,7 @@ import { MatDividerModule } from "@angular/material/divider";
 import { MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
 import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 
 
@@ -21,7 +22,8 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatCheckboxModule
   ],
   exports: [
     MatFormFieldModule,
@@ -32,7 +34,8 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }
