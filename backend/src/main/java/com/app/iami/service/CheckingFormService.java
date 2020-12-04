@@ -41,4 +41,8 @@ public class CheckingFormService {
     public CheckingForm findById(Integer idCheckingForm) {
         return checkingFormRepository.findById(idCheckingForm).orElseThrow();
     }
+
+    public List<CheckingForm> findAll() {
+        return checkingFormRepository.findAll();
+    }
 }

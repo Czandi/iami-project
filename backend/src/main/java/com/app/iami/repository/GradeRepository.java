@@ -14,5 +14,5 @@ public interface GradeRepository extends JpaRepository<Grade, Integer> {
 
     List<Grade> findByCourse(Course course);
 
-    List<Grade> findByStudentAndCourse(Student student, Course course);
+    List<Grade> findByStudentAndCourseOrderByCheckingForm(Student student, Course course);
 }

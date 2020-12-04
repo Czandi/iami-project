@@ -1,7 +1,9 @@
 package com.app.iami.controller.dto;
 
-import com.app.iami.model.CheckingForm;
+import com.app.iami.payload.response.GradeResponse;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -10,8 +12,7 @@ import lombok.*;
 @AllArgsConstructor
 public class GradeDto {
 
-    private Integer id;
-    private CheckingForm checkingForm;
-    private String grade;
+    private Integer idCheckingForm;
+    private List<GradeResponse> grades;
 
 }

@@ -1,27 +1,17 @@
 package com.app.iami.service;
 
-import com.app.iami.controller.dto.CourseDto;
-import com.app.iami.controller.dto.GradeDto;
-import com.app.iami.controller.dto.PresenceDto;
-import com.app.iami.controller.dto.StudentDto;
-import com.app.iami.controller.mapper.CourseMapper;
-import com.app.iami.controller.mapper.GradeMapper;
-import com.app.iami.controller.mapper.PresenceMapper;
-import com.app.iami.controller.mapper.StudentMapper;
+import com.app.iami.controller.dto.*;
+import com.app.iami.controller.mapper.*;
 import com.app.iami.model.*;
 import com.app.iami.payload.request.*;
 import com.app.iami.payload.response.CourseResponse;
-import com.app.iami.payload.response.PresenceResponse;
+import com.app.iami.payload.response.StudentDataResponse;
 import com.app.iami.payload.response.TeacherResponse;
 import com.app.iami.repository.*;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -111,22 +101,11 @@ public class CourseService {
         return courseResponse;
     }
 
-    public List<GradeDto> getAllGradesFromCourse(Integer id) {
-
-        Course course = findById(id);
-
-        List<Grade> grades = gradeService.findGradesForCourse(course);
-
-        List<GradeDto> gradesDto = GradeMapper.mapToGradeDtos(grades);
-
-        return gradesDto;
-    }
-
-    public List<GradeDto> insertGradesForStudent(Integer idCourse, List<GradeRequest> grades) {
+    public List<Grade> insertGradesForStudent(Integer idCourse, List<GradeRequest> grades) {
         return grades.stream().map(grade -> insertGradeForStudent(idCourse, grade)).collect(Collectors.toList());
     }
 
-    public GradeDto insertGradeForStudent(Integer id, GradeRequest gradeRequest) {
+    public Grade insertGradeForStudent(Integer id, GradeRequest gradeRequest) {
 
         Course course = courseRepository.findById(id).orElseThrow();
         CheckingForm checkingForm = checkingFormService.findById(gradeRequest.getIdCheckingForm());
@@ -142,7 +121,7 @@ public class CourseService {
 
         Grade grade = gradeService.insertGrade(g);
 
-        return GradeMapper.mapToGradeDto(grade);
+        return grade;
     }
 
     public List<Student> insertStudents(Integer id, List<StudentRequest> students) {
@@ -176,35 +155,11 @@ public class CourseService {
         return student;
     }
 
-    public List<StudentDto> getStudents(Integer idCourse) {
-
-        Course course = findById(idCourse);
-
-        List<Student> students = studentService.getStudentsByCourse(course);
-
-        List<StudentDto> studentDtos = students.stream().map(student -> {
-            List<Grade> grades = gradeService.findByStudentAndCourse(student, course);
-            return StudentMapper.mapToStudentDto(student, GradeMapper.mapToGradeDtos(grades));
-        }).collect(Collectors.toList());
-
-        return studentDtos;
-    }
-
     public Course findById(Integer id){
         return courseRepository.findById(id).orElseThrow();
     }
 
-    public List<PresenceDto> getAllPresences(Integer idCourse) {
-
-        Course course = findById(idCourse);
-
-        List<Presence> presences = presenceService.findByCourse(course);
-
-        return PresenceMapper.mapToPresenceDtos(presences);
-    }
-
-
-    public PresenceResponse insertPresenceForStudent(Integer idCourse, PresenceRequest p) {
+    public Presence insertPresenceForStudent(Integer idCourse, PresenceRequest p) {
 
         Course course = findById(idCourse);
         Student student = studentService.findById(p.getIdStudent());
@@ -218,11 +173,76 @@ public class CourseService {
 
         presence = presenceService.insertPresence(presence);
 
-        return PresenceMapper.mapToPresenceResponse(presence);
+        return presence;
     }
 
-    public List<PresenceResponse> insertPresencesForStudents(Integer idCourse, List<PresenceRequest> presences) {
+    public List<Presence> insertPresencesForStudents(Integer idCourse, List<PresenceRequest> presences) {
         return presences.stream().map(presence -> insertPresenceForStudent(idCourse, presence)).collect(Collectors.toList());
     }
 
+    public StudentDataDto getStudentsData(Integer idCourse) {
+
+        Course course = findById(idCourse);
+
+        List<CheckingFormDto> allCheckingForms = CheckingFormMapper.mapToCheckingFormDtos(course.getCheckingForms());
+        List<LocalDate> allDates = presenceService.findAllDates();
+
+        Set<Student> allStudents = findById(idCourse).getStudents();
+
+        List<StudentDataResponse> studentsData = allStudents.stream().map(student -> {
+
+            List<Grade> studentGrade = gradeService.findByStudentAndCourseOrderByCheckingForm(student, course);
+            List<Presence> studentPresence = presenceService.findByStudentAndCourseOrderByDate(student, course);
+
+            StudentDataResponse studentDataResponse = StudentDataResponse.builder()
+                    .student(student)
+                    .grades(GradeMapper.mapToGradeDto(studentGrade))
+                    .presences(PresenceMapper.mapToPresenceDtos(studentPresence))
+                    .build();
+
+            return studentDataResponse;
+        }).collect(Collectors.toList());
+
+        StudentDataDto studentDataDto = StudentDataDto.builder()
+                .dates(allDates)
+                .checkingForms(allCheckingForms)
+                .studentsData(studentsData)
+                .build();
+
+        return studentDataDto;
+    }
+
+//    public List<GradeDto> getAllGradesFromCourse(Integer id) {
+//
+//        Course course = findById(id);
+//
+//        List<Grade> grades = gradeService.findGradesForCourse(course);
+//
+//        List<GradeDto> gradesDto = GradeMapper.mapToGradeDtos(grades);
+//
+//        return gradesDto;
+//    }
+
+//    public List<StudentDto> getStudents(Integer idCourse) {
+//
+//        Course course = findById(idCourse);
+//
+//        List<Student> students = studentService.getStudentsByCourse(course);
+//
+//        List<StudentDto> studentDtos = students.stream().map(student -> {
+//            List<Grade> grades = gradeService.findByStudentAndCourse(student, course);
+//            return StudentMapper.mapToStudentDto(student, GradeMapper.mapToGradeDtos(grades));
+//        }).collect(Collectors.toList());
+//
+//        return studentDtos;
+//    }
+
+//    public List<PresenceDto> getAllPresences(Integer idCourse) {
+//
+//        Course course = findById(idCourse);
+//
+//        List<Presence> presences = presenceService.findByCourse(course);
+//
+//        return PresenceMapper.mapToPresenceDtos(presences);
+//    }
 }

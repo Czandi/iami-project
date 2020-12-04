@@ -1,11 +1,10 @@
 package com.app.iami.controller;
 
-import com.app.iami.controller.dto.CourseDto;
-import com.app.iami.controller.dto.GradeDto;
-import com.app.iami.controller.dto.PresenceDto;
-import com.app.iami.controller.dto.StudentDto;
+import com.app.iami.controller.dto.*;
 import com.app.iami.controller.mapper.CourseMapper;
 import com.app.iami.model.Course;
+import com.app.iami.model.Grade;
+import com.app.iami.model.Presence;
 import com.app.iami.model.Student;
 import com.app.iami.payload.request.CourseRequest;
 import com.app.iami.payload.request.GradeRequest;
@@ -43,52 +42,60 @@ public class CourseController {
         return courseService.insertCourse(newCourse);
     }
 
-    @GetMapping("courses/{id}")
-    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
-        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
-    }
-    @GetMapping("/courses/{id}/grades")
-    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){
-        return courseService.getAllGradesFromCourse(idCourse);
-    }
-
-//    @PostMapping(value = "/courses/{id}/grades", params = "grade")
-//    public GradeDto insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody GradeRequest grade){
-//        return courseService.insertGradeForStudent(idCourse, grade);
-//    }
-
     @PostMapping("/courses/{id}/grades")
-    public List<GradeDto> insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody List<GradeRequest> grades){
+    public List<Grade> insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody List<GradeRequest> grades){
         return courseService.insertGradesForStudent(idCourse, grades);
     }
 
-    @GetMapping("/courses/{id}/students")
-    public List<StudentDto> getStudentList(@PathVariable("id") Integer idCourse){
-        return courseService.getStudents(idCourse);
-    }
+
 
     @PostMapping(value = "/courses/{id}/students", params = "student")
     public Student insertStudent(@PathVariable Integer id, @RequestBody StudentRequest student){
         return courseService.insertStudent(id, student);
     }
 
+    @PostMapping(value = "/courses/{id}/presences")
+    public List<Presence> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
+        return courseService.insertPresencesForStudents(idCourse, presences);
+    }
+
+    @GetMapping("/courses/{id}/students-data")
+    public StudentDataDto getStudentsData(@PathVariable("id") Integer idCourse){
+        return courseService.getStudentsData(idCourse);
+    }
+
+//    @GetMapping("courses/{id}")
+//    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
+//        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
+//    }
+
+//    @GetMapping("/courses/{id}/grades")
+//    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){
+//        return courseService.getAllGradesFromCourse(idCourse);
+//    }
+
+//    @PostMapping(value = "/courses/{id}/grades", params = "grade")
+//    public GradeDto insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody GradeRequest grade){
+//        return courseService.insertGradeForStudent(idCourse, grade);
+//    }
+
+//    @GetMapping("/courses/{id}/students")
+//    public List<StudentDto> getStudentList(@PathVariable("id") Integer idCourse){
+//        return courseService.getStudents(idCourse);
+//    }
+
 //    @PostMapping("/courses/{id}/students")
 //    public List<Student> insertStudents(@PathVariable Integer id, @RequestBody List<StudentRequest> students){
 //        return courseService.insertStudents(id, students);
 //    }
 
-    @GetMapping("/courses/{id}/presences")
-    public List<PresenceDto> getPresences(@PathVariable("id") Integer idCourse){
-        return courseService.getAllPresences(idCourse);
-    }
+//    @GetMapping("/courses/{id}/presences")
+//    public List<PresenceDto> getPresences(@PathVariable("id") Integer idCourse){
+//        return courseService.getAllPresences(idCourse);
+//    }
 
 //    @PostMapping(value = "/courses/{id}/presences")
 //    public PresenceDto insertPresenceForStudent(@PathVariable("id") Integer idCourse, @RequestBody PresenceRequest presence){
 //        return courseService.insertPresenceForStudent(idCourse, presence);
 //    }
-
-    @PostMapping(value = "/courses/{id}/presences")
-    public List<PresenceResponse> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
-        return courseService.insertPresencesForStudents(idCourse, presences);
-    }
 }
