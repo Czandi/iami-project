@@ -1,6 +1,71 @@
-{{ course.name }}
-{{ course.teacher.name }}
-{{ course.teacher.surname}}
-{{ course.time }}
-{{ course.day }}
-{{ course.subject}}
+<div class="hub-nav">
+
+  <div (click)="checkPresence()" class="btn-hub">
+    Wyświetl kurs
+  </div>
+
+<div (click)="displayCourse()" class="btn-hub">
+  Sprawdź obecność
+</div>
+
+</div>
+
+<div *ngIf="isPresence" class="flex-system">
+
+  <div class="container-content-small">
+    <form action="">
+    <table>
+      <tr>
+        <th>Imie</th>
+        <th>Nazwisko</th>
+        <th>Obecność</th>
+      </tr>
+      <tr *ngFor="let cF of checkboxForms, let i=index">
+        <td> {{ course.students[i].name }}</td>
+        <td> {{ course.students[i].surname }}</td>
+        <td>
+          <mat-checkbox [formControl]="cF.bool" class="example-margin" value="false"></mat-checkbox>
+        </td>
+      </tr>
+    </table>
+
+    <div (click)="checkPost()" class="btn-hub">
+      Zatwierdź
+    </div>
+    </form>
+  </div>
+
+</div>
+
+<div *ngIf="!isPresence" class="flex-system">
+
+    <div class="container-content-small">
+      <form action="">
+        <table>
+          <tr>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th *ngFor="let checkingform of course.checkingForms"> {{ checkingform.name}}</th>
+          </tr>
+          <tr *ngFor="let cF of checkboxForms, let i=index">
+            <td> {{ course.students[i].name }}</td>
+            <td> {{ course.students[i].surname }}</td>
+
+            <td *ngFor="let s of course.checkingForms">
+              <mat-form-field class="width-table-input">
+                <mat-label>Ocena</mat-label>
+                <input
+                  type="number"
+                  class=""
+                  autocomplete="off"
+                  matInput
+                />
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+
+</div>
