@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {Subscription} from "rxjs";
 import {CourseService} from "../../../../services/course.service";
@@ -19,6 +19,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
   public dateList: any = ['init'];
   public checkboxForms: any = [];
   public presence: Presence [] = [];
+  public isPresence: boolean = false;
 
 
   constructor(
@@ -65,4 +66,11 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
     this.courseService.addPresence(this.id_course, this.presence).subscribe();
   }
 
+  checkPresence() {
+    this.isPresence = false;
+  }
+
+  displayCourse() {
+    this.isPresence = true;
+  }
 }

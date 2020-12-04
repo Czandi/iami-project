@@ -3,7 +3,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  width: 35vw;
+  min-width: 35vw;
   justify-content: center;
   min-height: 60vh;
   background: linear-gradient(
@@ -20,6 +20,10 @@
 .btn-hub:hover {
   cursor: pointer;
   color: #c6b497;
+}
+
+.width-table-input{
+  max-width: 80px;
 }
 
 .buttons{
@@ -65,4 +69,11 @@ th{
   .form-grid {
     max-width: 80%;
   }
+}
+
+@media (max-width: 400px){
+  .width-table-input{
+    max-width: 50px;
+  }
+
 }
