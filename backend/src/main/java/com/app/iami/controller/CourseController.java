@@ -64,10 +64,10 @@ public class CourseController {
         return courseService.getStudentsData(idCourse);
     }
 
-//    @GetMapping("courses/{id}")
-//    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
-//        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
-//    }
+    @GetMapping("courses/{id}")
+    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
+        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
+    }
 
 //    @GetMapping("/courses/{id}/grades")
 //    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){

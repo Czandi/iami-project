@@ -31,7 +31,7 @@ export class CourseService {
     return this.http.post(this.API_URL + '/' + id + '/presences', presence);
   }
 
-  public getPresences(id: string):Observable<any>{
-    return this.http.get(this.API_URL + '/' + id + '/presences');
+  public getStudentsData(id: string):Observable<any>{
+    return this.http.get(this.API_URL + '/' + id + '/students-data');
   }
 }
