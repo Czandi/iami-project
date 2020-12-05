@@ -13,7 +13,7 @@ public class CheckingFormMapper {
         return checkingForms.stream().map(checkingForm -> mapToCheckingFormDto(checkingForm)).collect(Collectors.toList());
     }
 
-    private static CheckingFormDto mapToCheckingFormDto(CheckingForm checkingForm) {
+    public static CheckingFormDto mapToCheckingFormDto(CheckingForm checkingForm) {
         return CheckingFormDto.builder()
                 .id(checkingForm.getId())
                 .name(checkingForm.getName())

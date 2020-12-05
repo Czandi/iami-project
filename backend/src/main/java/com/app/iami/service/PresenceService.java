@@ -10,7 +10,6 @@ import com.app.iami.repository.PresenceRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,8 +30,8 @@ public class PresenceService {
         return presenceRepository.save(presence);
     }
 
-    public List<LocalDate> findAllDates() {
-        return presenceRepository.findAllDates();
+    public List<LocalDate> findAllDatesInCourse(Course course) {
+        return presenceRepository.findAllDatesByCourse(course);
     }
 
     public List<Presence> findByStudentAndCourseOrderByDate(Student student, Course course) {

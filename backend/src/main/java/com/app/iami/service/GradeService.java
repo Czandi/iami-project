@@ -3,10 +3,12 @@ package com.app.iami.service;
 import com.app.iami.model.Course;
 import com.app.iami.model.Grade;
 import com.app.iami.model.Student;
+import com.app.iami.payload.request.UpdateGradeRequest;
 import com.app.iami.repository.GradeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class GradeService {
@@ -29,4 +31,18 @@ public class GradeService {
         return gradeRepository.findByStudentAndCourseOrderByCheckingForm(student, course);
     }
 
+    public List<Grade> updateGrades(List<UpdateGradeRequest> grades) {
+        List<Grade> newGrades = grades.stream().map(grade -> {
+            Grade newGrade = findById(grade.getId());
+            newGrade.setGrade(grade.getGrade());
+            gradeRepository.save(newGrade);
+            return newGrade;
+        }).collect(Collectors.toList());
+
+        return newGrades;
+    }
+
+    public Grade findById(Integer id){
+        return gradeRepository.findById(id).orElseThrow();
+    }
 }

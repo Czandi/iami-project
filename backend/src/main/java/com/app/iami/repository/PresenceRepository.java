@@ -15,8 +15,9 @@ public interface PresenceRepository extends JpaRepository<Presence, Integer> {
 
     List<Presence> findByCourseOrderByDate(Course course);
 
-    @Query("Select distinct p.date from Presence p")
-    List<LocalDate> findAllDates();
+    @Query("Select distinct p.date from Presence p " +
+            "where p.course like ?1")
+    List<LocalDate> findAllDatesByCourse(Course course);
 
     List<Presence> findByStudentAndCourseOrderByDate(Student student, Course course);
 

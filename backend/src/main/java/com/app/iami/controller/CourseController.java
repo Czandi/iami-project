@@ -40,9 +40,9 @@ public class CourseController {
         return courseService.insertCourse(newCourse);
     }
 
-    @PostMapping("/courses/{id}/grades")
-    public List<Grade> insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody List<GradeRequest> grades){
-        return courseService.insertGradesForStudent(idCourse, grades);
+    @GetMapping("courses/{id}")
+    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
+        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
     }
 
     @PostMapping(value = "/courses/{id}/students", params = "student")
@@ -50,19 +50,14 @@ public class CourseController {
         return courseService.insertStudent(id, student);
     }
 
-    @PostMapping(value = "/courses/{id}/presences")
-    public List<Presence> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
-        return courseService.insertPresencesForStudents(idCourse, presences);
-    }
-
     @GetMapping("/courses/{id}/students-data")
     public StudentDataDto getStudentsData(@PathVariable("id") Integer idCourse){
         return courseService.getStudentsData(idCourse);
     }
 
-    @GetMapping("courses/{id}")
-    public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
-        return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
+    @PostMapping(value = "/courses/{id}/presences")
+    public List<Presence> insertPresencesForStudents(@PathVariable("id") Integer idCourse, @RequestBody List<PresenceRequest> presences){
+        return courseService.insertPresencesForStudents(idCourse, presences);
     }
 
     @DeleteMapping("courses/{id}/presences")
@@ -74,6 +69,17 @@ public class CourseController {
     public List<PresenceDto> updatePresences(@PathVariable("id") Integer idCourse, @RequestBody List<UpdatePresenceRequest> presences){
         return courseService.updatePresences(presences);
     }
+
+    @PostMapping("/courses/{id}/grades")
+    public List<UpdatedGradeDto> insertGradeForStudent(@PathVariable("id") Integer idCourse, @RequestBody List<GradeRequest> grades){
+        return courseService.insertGradesForStudent(idCourse, grades);
+    }
+
+    @PutMapping("/courses/{id}/grades")
+    public List<UpdatedGradeDto> updateGrades(@PathVariable("id") Integer idCourse, @RequestBody List<UpdateGradeRequest> grades){
+        return courseService.updateGrades(grades);
+    }
+
 
 //    @GetMapping("/courses/{id}/grades")
 //    public List<GradeDto> getAllGrades(@PathVariable("id") Integer idCourse){

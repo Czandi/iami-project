@@ -8,7 +8,6 @@ import com.app.iami.payload.response.CourseResponse;
 import com.app.iami.payload.response.StudentDataResponse;
 import com.app.iami.payload.response.TeacherResponse;
 import com.app.iami.repository.*;
-import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -102,11 +101,11 @@ public class CourseService {
         return courseResponse;
     }
 
-    public List<Grade> insertGradesForStudent(Integer idCourse, List<GradeRequest> grades) {
+    public List<UpdatedGradeDto> insertGradesForStudent(Integer idCourse, List<GradeRequest> grades) {
         return grades.stream().map(grade -> insertGradeForStudent(idCourse, grade)).collect(Collectors.toList());
     }
 
-    public Grade insertGradeForStudent(Integer id, GradeRequest gradeRequest) {
+    public UpdatedGradeDto insertGradeForStudent(Integer id, GradeRequest gradeRequest) {
 
         Course course = courseRepository.findById(id).orElseThrow();
         CheckingForm checkingForm = checkingFormService.findById(gradeRequest.getIdCheckingForm());
@@ -122,7 +121,7 @@ public class CourseService {
 
         Grade grade = gradeService.insertGrade(g);
 
-        return grade;
+        return GradeMapper.mapToUpdatedGradeDto(grade);
     }
 
     public List<Student> insertStudents(Integer id, List<StudentRequest> students) {
@@ -186,7 +185,7 @@ public class CourseService {
         Course course = findById(idCourse);
 
         List<CheckingFormDto> allCheckingForms = CheckingFormMapper.mapToCheckingFormDtos(course.getCheckingForms());
-        List<LocalDate> allDates = presenceService.findAllDates();
+        List<LocalDate> allDates = presenceService.findAllDatesInCourse(course);
 
         Set<Student> allStudents = findById(idCourse).getStudents();
 
@@ -231,6 +230,10 @@ public class CourseService {
 
     public List<PresenceDto> updatePresences(List<UpdatePresenceRequest> presences) {
         return presenceService.updatePresences(presences);
+    }
+
+    public List<UpdatedGradeDto> updateGrades(List<UpdateGradeRequest> grades) {
+        return GradeMapper.mapToUpdatedGradeDtos(gradeService.updateGrades(grades));
     }
 
 //    public List<GradeDto> getAllGradesFromCourse(Integer id) {
