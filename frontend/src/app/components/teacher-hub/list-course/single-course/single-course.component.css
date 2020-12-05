@@ -79,6 +79,10 @@
   color: #c6b497;
 }
 
+.hub-nav {
+  height: 75px;
+}
+
 .width-table-input {
   max-width: 80px;
 }
@@ -97,10 +101,32 @@
 
 td {
   background-color: #34626c;
+  height: 70px;
 }
+
+/* .mat-form-field {
+  height: 50px;
+} */
 
 th {
   background-color: #204047;
+  height: 60px;
+  padding: 0 10px;
+}
+
+.student-name-table,
+.student-data-table {
+  display: inline-block;
+  text-transform: capitalize;
+}
+
+.student-name-table {
+  width: 40%;
+  margin-bottom: 17px;
+}
+
+.student-data-table {
+  width: 60%;
 }
 
 @media (max-width: 1200px) {

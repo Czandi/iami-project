@@ -45,4 +45,8 @@ export class CourseService {
 
     return this.http.delete(this.API_URL + '/' + id + '/presences', options);
   }
+
+  public updatePresences(id: String, presences: Array<any>): Observable<any> {
+    return this.http.put(this.API_URL + '/' + id + '/presences', presences);
+  }
 }
