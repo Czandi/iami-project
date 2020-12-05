@@ -5,7 +5,7 @@
   text-align: center;
   min-width: 35vw;
   justify-content: center;
-  min-height: 60vh;
+  height: 60vh;
   background: linear-gradient(
     90deg,
     rgba(207, 211, 206, 0.2721463585434174) 100%,
@@ -17,13 +17,42 @@
   border: 1px solid #839b97;
 }
 
+.overflowin-table {
+  overflow: auto;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
+.line {
+  width: 3px;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 10px;
+  position: absolute;
+  top: 39%;
+  left: 62%;
+}
+
+.col-width{
+  min-width: 9rem;
+}
+
+.line:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.line:nth-child(2) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
 .container-content-big {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   max-width: 75vw;
   justify-content: center;
-  min-height: 60vh;
+  height: 60vh;
   background: linear-gradient(
     90deg,
     rgba(207, 211, 206, 0.2721463585434174) 100%,
