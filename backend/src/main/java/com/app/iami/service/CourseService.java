@@ -8,6 +8,7 @@ import com.app.iami.payload.response.CourseResponse;
 import com.app.iami.payload.response.StudentDataResponse;
 import com.app.iami.payload.response.TeacherResponse;
 import com.app.iami.repository.*;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -210,6 +211,22 @@ public class CourseService {
                 .build();
 
         return studentDataDto;
+    }
+
+    public Boolean deletePresences(Integer idCourse, String date) {
+
+        Course course = findById(idCourse);
+
+        int indexOfFirstSlash = date.indexOf('-');
+        int indexOfSecondSlash = date.indexOf('-', date.indexOf('-') + 1);
+
+        int year = Integer.parseInt(date.substring(0, indexOfFirstSlash));
+        int month = Integer.parseInt(date.substring(indexOfFirstSlash + 1, indexOfSecondSlash));
+        int day = Integer.parseInt(date.substring(indexOfSecondSlash + 1));
+
+        LocalDate newDate = LocalDate.of(year, month, day);
+
+        return presenceService.deleteByCourseAndDate(course, newDate);
     }
 
 //    public List<GradeDto> getAllGradesFromCourse(Integer id) {

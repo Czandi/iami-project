@@ -20,4 +20,6 @@ public interface PresenceRepository extends JpaRepository<Presence, Integer> {
 
     List<Presence> findByStudentAndCourseOrderByDate(Student student, Course course);
 
+    List<Presence> findByCourseAndDate(Course course, LocalDate date);
+
 }

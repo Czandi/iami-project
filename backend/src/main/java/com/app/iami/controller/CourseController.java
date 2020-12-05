@@ -16,6 +16,7 @@ import com.app.iami.service.CheckingFormService;
 import com.app.iami.service.CourseService;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -47,8 +48,6 @@ public class CourseController {
         return courseService.insertGradesForStudent(idCourse, grades);
     }
 
-
-
     @PostMapping(value = "/courses/{id}/students", params = "student")
     public Student insertStudent(@PathVariable Integer id, @RequestBody StudentRequest student){
         return courseService.insertStudent(id, student);
@@ -67,6 +66,11 @@ public class CourseController {
     @GetMapping("courses/{id}")
     public CourseDto getCoursesById(@PathVariable("id") Integer idCourse) {
         return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
+    }
+
+    @PutMapping("courses/{id}/presences")
+    public Boolean deletePresences(@PathVariable("id") Integer idCourse, @RequestBody String date){
+        return courseService.deletePresences(idCourse, date);
     }
 
 //    @GetMapping("/courses/{id}/grades")

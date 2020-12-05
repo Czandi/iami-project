@@ -33,4 +33,19 @@ public class PresenceService {
     public List<Presence> findByStudentAndCourseOrderByDate(Student student, Course course) {
         return presenceRepository.findByStudentAndCourseOrderByDate(student, course);
     }
+
+    public Boolean deleteByCourseAndDate(Course course, LocalDate date) {
+
+        List<Presence> presences = presenceRepository.findByCourseAndDate(course, date);
+
+        if(presences.size() > 0){
+            for(int i = 0; i < presences.size(); i++){
+                presenceRepository.delete(presences.get(i));
+            }
+
+            return true;
+        }
+
+        return false;
+    }
 }
