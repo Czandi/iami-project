@@ -229,6 +229,10 @@ public class CourseService {
         return presenceService.deleteByCourseAndDate(course, newDate);
     }
 
+    public List<PresenceDto> updatePresences(List<UpdatePresenceRequest> presences) {
+        return presenceService.updatePresences(presences);
+    }
+
 //    public List<GradeDto> getAllGradesFromCourse(Integer id) {
 //
 //        Course course = findById(id);

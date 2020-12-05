@@ -1,13 +1,18 @@
 package com.app.iami.service;
 
+import com.app.iami.controller.dto.PresenceDto;
+import com.app.iami.controller.mapper.PresenceMapper;
 import com.app.iami.model.Course;
 import com.app.iami.model.Presence;
 import com.app.iami.model.Student;
+import com.app.iami.payload.request.UpdatePresenceRequest;
 import com.app.iami.repository.PresenceRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PresenceService {
@@ -47,5 +52,21 @@ public class PresenceService {
         }
 
         return false;
+    }
+
+    public Presence findById(Integer id){
+        return presenceRepository.findById(id).orElseThrow();
+    }
+
+    public List<PresenceDto> updatePresences(List<UpdatePresenceRequest> presences) {
+
+        List<Presence> newPresences =  presences.stream().map(presence -> {
+            Presence newPresence = findById(presence.getId());
+            newPresence.setPresence(presence.getPresence());
+            presenceRepository.save(newPresence);
+            return newPresence;
+        }).collect(Collectors.toList());
+
+        return PresenceMapper.mapToPresenceDtos(newPresences);
     }
 }

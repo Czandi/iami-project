@@ -6,10 +6,7 @@ import com.app.iami.model.Course;
 import com.app.iami.model.Grade;
 import com.app.iami.model.Presence;
 import com.app.iami.model.Student;
-import com.app.iami.payload.request.CourseRequest;
-import com.app.iami.payload.request.GradeRequest;
-import com.app.iami.payload.request.PresenceRequest;
-import com.app.iami.payload.request.StudentRequest;
+import com.app.iami.payload.request.*;
 import com.app.iami.payload.response.CourseResponse;
 import com.app.iami.payload.response.PresenceResponse;
 import com.app.iami.service.CheckingFormService;
@@ -68,9 +65,14 @@ public class CourseController {
         return CourseMapper.mapToCourseDto(courseService.findById(idCourse));
     }
 
-    @PutMapping("courses/{id}/presences")
+    @DeleteMapping("courses/{id}/presences")
     public Boolean deletePresences(@PathVariable("id") Integer idCourse, @RequestBody String date){
         return courseService.deletePresences(idCourse, date);
+    }
+
+    @PutMapping("courses/{id}/presences")
+    public List<PresenceDto> updatePresences(@PathVariable("id") Integer idCourse, @RequestBody List<UpdatePresenceRequest> presences){
+        return courseService.updatePresences(presences);
     }
 
 //    @GetMapping("/courses/{id}/grades")
