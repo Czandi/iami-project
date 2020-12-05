@@ -1,9 +1,8 @@
-
 .container-content-small {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  min-width: 35vw;
+  width: 35vw;
   justify-content: center;
   height: 60vh;
   background: linear-gradient(
@@ -21,20 +20,31 @@
   overflow: auto;
 }
 
+.date {
+  position: relative;
+}
+
+.delete-button {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 .delete-button:hover {
   cursor: pointer;
 }
 
 .line {
   width: 3px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: white;
   height: 10px;
   position: absolute;
   top: 39%;
   left: 62%;
 }
 
-.col-width{
+.col-width {
   min-width: 9rem;
 }
 
@@ -50,7 +60,7 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  max-width: 75vw;
+  width: 30vw;
   justify-content: center;
   height: 60vh;
   background: linear-gradient(
@@ -69,33 +79,29 @@
   color: #c6b497;
 }
 
-.width-table-input{
+.width-table-input {
   max-width: 80px;
 }
 
-.buttons{
+.buttons {
   margin-top: auto;
   margin-bottom: 1rem;
 }
 
-.btn-hub{
+.btn-hub {
   color: white;
   font-size: 1.2rem;
   padding: 0.8rem;
   margin: 0.8rem;
 }
 
-
-
-
-td{
+td {
   background-color: #34626c;
 }
 
-th{
+th {
   background-color: #204047;
 }
-
 
 @media (max-width: 1200px) {
   .container-content-small {
@@ -118,9 +124,8 @@ th{
   }
 }
 
-@media (max-width: 400px){
-  .width-table-input{
+@media (max-width: 400px) {
+  .width-table-input {
     max-width: 50px;
   }
-
 }

@@ -1,84 +1,77 @@
 <div class="hub-nav">
+  <div (click)="checkPresence()" class="btn-hub">Wyświetl kurs</div>
 
-  <div (click)="checkPresence()" class="btn-hub">
-    Wyświetl kurs
+  <div *ngIf="isChecked" (click)="displayCourse()" class="btn-hub">
+    Sprawdź obecność
   </div>
-
-<div *ngIf="isChecked" (click)="displayCourse()" class="btn-hub">
-  Sprawdź obecność
-</div>
-
 </div>
 
 <div *ngIf="isPresence && isChecked" class="flex-system">
-
   <div class="container-content-small overflowin-table">
     <form action="">
+      <table>
+        <tr>
+          <th>Imie</th>
+          <th>Nazwisko</th>
+          <th>Obecność</th>
+        </tr>
+        <tr *ngFor="let cF of checkboxForms; let i = index">
+          <td>{{ course.students[i].name }}</td>
+          <td>{{ course.students[i].surname }}</td>
+          <td>
+            <mat-checkbox
+              [formControl]="cF.bool"
+              class="example-margin"
+              value="false"
+            ></mat-checkbox>
+          </td>
+        </tr>
+      </table>
+
+      <div (click)="checkPost()" class="btn-hub">Zatwierdź</div>
+    </form>
+  </div>
+</div>
+
+<div *ngIf="!isPresence" class="flex-system">
+  <div class="container-content-big overflowin-table">
     <table>
       <tr>
         <th>Imie</th>
         <th>Nazwisko</th>
-        <th>Obecność</th>
+        <th *ngFor="let checkForm of studentsData.checkingForms">
+          {{ checkForm.name }}
+        </th>
+
+        <th
+          class="col-width date"
+          *ngFor="let d of studentsData.studentsData[0].presences"
+        >
+          {{ d.date }}
+          <span class="delete-button" (click)="deleteCol(d.date)">
+            <span class="line"></span>
+            <span class="line"></span>
+          </span>
+        </th>
       </tr>
-      <tr *ngFor="let cF of checkboxForms, let i=index">
-        <td> {{ course.students[i].name }}</td>
-        <td> {{ course.students[i].surname }}</td>
-        <td>
-          <mat-checkbox [formControl]="cF.bool" class="example-margin" value="false"></mat-checkbox>
+      <tr *ngFor="let students of studentsData.studentsData">
+        <td>{{ students.student.name }}</td>
+        <td>{{ students.student.surname }}</td>
+
+        <td *ngFor="let students of studentsData.checkingForms">
+          <mat-form-field class="width-table-input">
+            <mat-label>Ocena</mat-label>
+            <input type="number" class="" autocomplete="off" matInput />
+          </mat-form-field>
+        </td>
+        <td *ngFor="let presenceArray of students.presences">
+          <mat-checkbox
+            class="example-margin"
+            [checked]="presenceArray.presence"
+            value="true"
+          ></mat-checkbox>
         </td>
       </tr>
     </table>
-
-    <div (click)="checkPost()" class="btn-hub">
-      Zatwierdź
-    </div>
-    </form>
   </div>
-
-</div>
-
-<div *ngIf="!isPresence" class="flex-system">
-
-    <div class="container-content-big overflowin-table">
-
-        <table>
-          <tr>
-            <th>Imie</th>
-            <th>Nazwisko</th>
-            <th *ngFor="let checkForm of studentsData.checkingForms">{{ checkForm.name }}</th>
-
-              <th class="col-width" *ngFor="let d of studentsData.studentsData[0].presences">
-                {{ d.date }}
-                <span class="delete-button" (click)="deleteCol(d.id)">
-                  <span class="line"></span>
-                  <span class="line"></span>
-                </span>
-
-              </th>
-
-          </tr>
-          <tr *ngFor="let students of studentsData.studentsData">
-            <td> {{ students.student.name }}</td>
-            <td> {{ students.student.surname }}</td>
-
-            <td *ngFor="let students of studentsData.checkingForms">
-              <mat-form-field  class="width-table-input">
-                <mat-label>Ocena</mat-label>
-                <input
-                  type="number"
-                  class=""
-                  autocomplete="off"
-                  matInput
-                />
-              </mat-form-field>
-            </td>
-            <td *ngFor="let presenceArray of students.presences">
-              <mat-checkbox class="example-margin" [checked]="presenceArray.presence" value="true"></mat-checkbox>
-            </td>
-          </tr>
-        </table>
-
-    </div>
-
-
 </div>
