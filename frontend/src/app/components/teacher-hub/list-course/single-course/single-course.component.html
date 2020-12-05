@@ -4,13 +4,13 @@
     Wyświetl kurs
   </div>
 
-<div (click)="displayCourse()" class="btn-hub">
+<div *ngIf="isChecked" (click)="displayCourse()" class="btn-hub">
   Sprawdź obecność
 </div>
 
 </div>
 
-<div *ngIf="isPresence" class="flex-system">
+<div *ngIf="isPresence && isChecked" class="flex-system">
 
   <div class="container-content-small">
     <form action="">
@@ -39,7 +39,7 @@
 
 <div *ngIf="!isPresence" class="flex-system">
 
-    <div class="container-content-small">
+    <div class="container-content-big">
       <form action="">
         <table>
           <tr>

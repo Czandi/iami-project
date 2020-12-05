@@ -22,6 +22,10 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
   public checkboxForms: any = [];
   public presence: Presence [] = [];
   public isPresence: boolean = false;
+  private today: any;
+  public isChecked: boolean = true;
+
+
 
 
   constructor(
@@ -31,6 +35,12 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
 
 
   ngOnInit(): void {
+    let today = new Date();
+    let dd = String(today.getDate()).padStart(2, '0');
+    let mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = today.getFullYear();
+    this.today = yyyy + '-' + mm + '-' + dd;
+    console.log(this.today);
     this.id_course = this.route.snapshot.paramMap.get('id');
 
     this.courseStudentsServiceSub = this.courseService
@@ -38,7 +48,11 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
       .subscribe( (data) =>{
         this.studentsData = data;
         console.log(data);
-        console.log(data.studentsData[0].presences[0]);
+        for (let i=0; i < this.studentsData.dates.length; i++){
+            if (this.studentsData.dates[i].includes(this.today)){
+              this.isChecked = false;
+            }
+        }
       });
 
     this.courseSingleServiceSub = this.courseService
@@ -70,7 +84,6 @@ export class SingleCourseComponent implements OnInit, OnDestroy{
   }
 
   checkPost() {
-    console.log(this.course.students.length);
     for (let i=0; i<this.course.students.length; i++){
       let tempPresence = new Presence();
       tempPresence.idStudent = this.course.students[i].id;

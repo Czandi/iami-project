@@ -17,6 +17,24 @@
   border: 1px solid #839b97;
 }
 
+.container-content-big {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  max-width: 75vw;
+  justify-content: center;
+  min-height: 60vh;
+  background: linear-gradient(
+    90deg,
+    rgba(207, 211, 206, 0.2721463585434174) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #839b97;
+}
+
 .btn-hub:hover {
   cursor: pointer;
   color: #c6b497;
