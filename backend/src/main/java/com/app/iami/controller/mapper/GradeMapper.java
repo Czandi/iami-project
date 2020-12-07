@@ -15,33 +15,25 @@ public class GradeMapper {
         List<GradeDto> gradeDtos = new ArrayList<>();
 
         if(grades.size() > 0){
-            Integer prevId = grades.get(0).getCheckingForm().getId();
-            List<GradeResponse> gradeResponses = new ArrayList<>();
 
             for(int i = 0; i < grades.size(); i++){
 
                 Grade currentGrade = grades.get(i);
-
-                Integer currId = currentGrade.getCheckingForm().getId();
 
                 GradeResponse gradeResponse = GradeResponse.builder()
                         .id(currentGrade.getId())
                         .name(currentGrade.getGrade())
                         .build();
 
-                if(prevId != currId){
-                    GradeDto gradeDto = GradeDto.builder()
-                            .grades(gradeResponses)
-                            .idCheckingForm(prevId)
-                            .build();
 
-                    gradeDtos.add(gradeDto);
+                GradeDto gradeDto = GradeDto.builder()
+                        .grade(gradeResponse)
+                        .idCheckingForm(currentGrade.getCheckingForm().getId())
+                        .build();
 
-                    gradeResponses = new ArrayList<>();
-                }
-                gradeResponses.add(gradeResponse);
-
+                gradeDtos.add(gradeDto);
             }
+
         }
 
         return gradeDtos;

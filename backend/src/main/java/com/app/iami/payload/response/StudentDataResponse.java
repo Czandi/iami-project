@@ -17,5 +17,6 @@ public class StudentDataResponse {
     private Student student;
     private List<PresenceDto> presences;
     private List<GradeDto> grades;
+    private Float averageGrade;
 
 }
