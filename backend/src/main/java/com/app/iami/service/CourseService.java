@@ -232,7 +232,6 @@ public class CourseService {
 
             if (perfectPresence && studentGrades.size() - 1 == 1) {
                 averageGrade -= minGrade;
-                System.out.println(averageGrade);
             } else if (perfectPresence && studentGrades.size() - 1 > 1){
                 averageGrade -= minGrade;
                 averageGrade /= studentGrades.size();

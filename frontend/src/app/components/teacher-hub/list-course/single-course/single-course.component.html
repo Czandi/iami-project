@@ -59,12 +59,9 @@
             {{ checkForm.name }}
           </th>
 
-          <th
-            class="col-width date"
-            *ngFor="let d of studentsData.studentsData[0].presences"
-          >
-            {{ d.date }}
-            <span class="delete-button" (click)="deleteCol(d.date)">
+          <th class="col-width date" *ngFor="let date of studentsData.dates">
+            {{ date }}
+            <span class="delete-button" (click)="deleteCol(date)">
               <span class="line"></span>
               <span class="line"></span>
             </span>
@@ -72,7 +69,11 @@
         </tr>
 
         <tr *ngFor="let studentData of studentsData.studentsData">
-          <td *ngFor="let grade of studentDataForms[studentData.student.id].gradesForms">
+          <td
+            *ngFor="
+              let grade of studentDataForms[studentData.student.id].gradesForms
+            "
+          >
             <mat-form-field class="width-table-input">
               <mat-label>Ocena</mat-label>
               <input
@@ -80,8 +81,9 @@
                 class=""
                 autocomplete="off"
                 matInput
-                [formControl]="grade.grade"
-                value="{{ grade.grade}}"/>
+                [formControl]="grade.form"
+                value="{{ grade.grade }}"
+              />
             </mat-form-field>
           </td>
           <td

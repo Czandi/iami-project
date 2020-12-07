@@ -53,9 +53,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   getStudentsDataForms() {
     this.courseStudentsServiceSub = this.courseService
       .getStudentsData(this.id_course)
-      .subscribe((data) => {
-        console.log(data.studentsData);
-      });
+      .subscribe((data) => {});
   }
 
   getStudentsData() {
@@ -63,7 +61,6 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       .getStudentsData(this.id_course)
       .subscribe((data) => {
         this.studentsData = data;
-        console.log(data);
         this.isChecked = true;
         for (let i = 0; i < this.studentsData.dates.length; i++) {
           if (this.studentsData.dates[i].includes(this.getCurrentDate())) {
@@ -76,37 +73,45 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
 
   createFormControlsForData(data) {
     for (let i = 0; i < data.studentsData.length; i++) {
-      this.studentDataForms[data.studentsData[i].student.id] = {
+      let currentData = data.studentsData[i];
+      let currentStudentId = currentData.student.id;
+
+      this.studentDataForms[currentStudentId] = {
         presencesForms: [],
         gradesForms: [],
       };
-      for (let j = 0; j < data.studentsData[i].presences.length; j++) {
-        this.studentDataForms[
-          data.studentsData[i].student.id
-        ].presencesForms.push({
-          form: new FormControl(data.studentsData[i].presences[j].presence),
-          idPresence: data.studentsData[i].presences[j].id,
+
+      for (let j = 0; j < currentData.presences.length; j++) {
+        this.studentDataForms[currentStudentId].presencesForms.push({
+          form: new FormControl(currentData.presences[j].presence),
+          idPresence: currentData.presences[j].id,
         });
       }
-      if ( data.studentsData[i].grades.length == 0){
-        for (let j = 0; j < data.checkingForms.length; j++){
-        this.studentDataForms[data.studentsData[i].student.id].gradesForms.push(
-          {
-            form: new FormControl(0),
-            idGrade: j,
-          }
-        )}
+
+      for (let j = 0; j < data.checkingForms.length; j++) {
+        this.studentDataForms[currentStudentId].gradesForms.push({
+          form: new FormControl(''),
+          idCheckingForm: data.checkingForms[j].id,
+          idGrade: '',
+        });
       }
-      else {
-        for (let j = 0; j < data.studentsData[i].grades.length; j++) {
-          this.studentDataForms[data.studentsData[i].student.id].gradesForms.push(
-            {
-              idStudent: data.studentsData[i].student.id,
-              idCheckingForm: this.studentsData.checkingForms[j].id,
-              grade: data.studentsData[i].grades[j].grade.name,
-            }
-          );
-          console.log(this.studentDataForms);
+
+      console.log(this.studentDataForms);
+
+      for (let j = 0; j < currentData.grades.length; j++) {
+        for (
+          let k = 0;
+          k < this.studentDataForms[currentStudentId].gradesForms.length;
+          k++
+        ) {
+          if (
+            this.studentDataForms[currentStudentId].gradesForms[k]
+              .idCheckingForm === data.studentsData[i].grades[j].idCheckingForm
+          ) {
+            this.studentDataForms[currentStudentId].gradesForms[
+              k
+            ].form.setValue(currentData.grades[j].grade.name);
+          }
         }
       }
     }
@@ -162,7 +167,6 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
     this.courseService
       .deletePresences(this.id_course, date)
       .subscribe((date) => {
-        console.log(date);
         this.getStudentsData();
       });
   }
@@ -175,35 +179,32 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       let currentStudentId = this.studentsData.studentsData[i].student.id;
       let currentPresence = this.studentDataForms[currentStudentId]
         .presencesForms;
+      let currentGrade = this.studentDataForms[currentStudentId].gradesForms;
+
       for (let j = 0; j < currentPresence.length; j++) {
         newPresences.push({
           id: currentPresence[j].idPresence,
           presence: currentPresence[j].form.value,
         });
       }
+
+      for (let j = 0; j < currentGrade.length; j++) {
+        newGrades.push({
+          idStudent: currentStudentId,
+          idCheckingForm: this.studentsData.checkingForms[j].id,
+          grade: currentGrade[j].form.value,
+        });
+      }
     }
 
-
-      for (let i = 0; i < this.studentsData.studentsData.length; i++) {
-        let currentStudentId = this.studentsData.studentsData[i].student.id;
-        let currentGrade = this.studentDataForms[currentStudentId]
-          .gradesForms;
-        for (let j = 0; j < currentGrade.length; j++) {
-          newGrades.push({
-            idStudent: currentStudentId,
-            idCheckingForm: this.studentsData.checkingForms[j].id,
-            grade: currentGrade[j].form.value,
-          });
-        }
-      }
-      console.log(newGrades);
+    console.log(newPresences);
+    console.log(newGrades);
 
     this.courseService
       .updateGrades(this.id_course, newGrades)
       .subscribe((data) => {
         console.log(data);
       });
-
 
     this.courseService
       .updatePresences(this.id_course, newPresences)
