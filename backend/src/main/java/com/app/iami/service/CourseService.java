@@ -85,6 +85,7 @@ public class CourseService {
         }
 
         course.setCheckingForms(checkingForms);
+        addEmptyGradesForStudents(course);
 
         TeacherResponse teacherResponse = new TeacherResponse(course.getTeacher());
 
@@ -97,8 +98,26 @@ public class CourseService {
                 .subject(course.getSubject())
                 .teacher(teacherResponse)
                 .build();
-
+        
         return courseResponse;
+    }
+
+    public void addEmptyGradesForStudents(Course course){
+        Set<CheckingForm> checkingForms = course.getCheckingForms();
+        Set<Student> students = course.getStudents();
+
+        for(Student student: students){
+            for(CheckingForm checkingForm: checkingForms){
+                Grade grade = Grade.builder()
+                        .grade("")
+                        .course(course)
+                        .student(student)
+                        .checkingForm(checkingForm)
+                        .build();
+
+                gradeService.insertGrade(grade);
+            }
+        }
     }
 
     public List<UpdatedGradeDto> insertGradesForStudent(Integer idCourse, List<GradeRequest> grades) {
