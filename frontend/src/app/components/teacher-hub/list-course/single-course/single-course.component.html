@@ -72,10 +72,16 @@
         </tr>
 
         <tr *ngFor="let studentData of studentsData.studentsData">
-          <td *ngFor="let checkingForms of studentsData.checkingForms">
+          <td *ngFor="let grade of studentDataForms[studentData.student.id].gradesForms">
             <mat-form-field class="width-table-input">
               <mat-label>Ocena</mat-label>
-              <input type="number" class="" autocomplete="off" matInput />
+              <input
+                type="number"
+                class=""
+                autocomplete="off"
+                matInput
+                [formControl]="grade.grade"
+                value="{{ grade.grade}}"/>
             </mat-form-field>
           </td>
           <td

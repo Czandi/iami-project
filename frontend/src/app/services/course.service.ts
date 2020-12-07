@@ -49,4 +49,9 @@ export class CourseService {
   public updatePresences(id: String, presences: Array<any>): Observable<any> {
     return this.http.put(this.API_URL + '/' + id + '/presences', presences);
   }
+
+  public updateGrades(id: String, grades: Array<any>): Observable<any> {
+    return this.http.post(this.API_URL + '/' + id + '/grades', grades);
+  }
 }
+

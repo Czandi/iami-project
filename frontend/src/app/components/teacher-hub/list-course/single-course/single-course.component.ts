@@ -63,6 +63,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       .getStudentsData(this.id_course)
       .subscribe((data) => {
         this.studentsData = data;
+        console.log(data);
         this.isChecked = true;
         for (let i = 0; i < this.studentsData.dates.length; i++) {
           if (this.studentsData.dates[i].includes(this.getCurrentDate())) {
@@ -87,13 +88,26 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
           idPresence: data.studentsData[i].presences[j].id,
         });
       }
-      for (let j = 0; j < data.studentsData[i].grades.length; j++) {
+      if ( data.studentsData[i].grades.length == 0){
+        for (let j = 0; j < data.checkingForms.length; j++){
         this.studentDataForms[data.studentsData[i].student.id].gradesForms.push(
           {
-            form: new FormControl(data.studentsData[i].grades[j].grade),
-            idGrade: data.studentsData[i].grades[j].id,
+            form: new FormControl(0),
+            idGrade: j,
           }
-        );
+        )}
+      }
+      else {
+        for (let j = 0; j < data.studentsData[i].grades.length; j++) {
+          this.studentDataForms[data.studentsData[i].student.id].gradesForms.push(
+            {
+              idStudent: data.studentsData[i].student.id,
+              idCheckingForm: this.studentsData.checkingForms[j].id,
+              grade: data.studentsData[i].grades[j].grade.name,
+            }
+          );
+          console.log(this.studentDataForms);
+        }
       }
     }
   }
@@ -155,6 +169,7 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
 
   updateData() {
     let newPresences = [];
+    let newGrades = [];
 
     for (let i = 0; i < this.studentsData.studentsData.length; i++) {
       let currentStudentId = this.studentsData.studentsData[i].student.id;
@@ -167,6 +182,28 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
         });
       }
     }
+
+
+      for (let i = 0; i < this.studentsData.studentsData.length; i++) {
+        let currentStudentId = this.studentsData.studentsData[i].student.id;
+        let currentGrade = this.studentDataForms[currentStudentId]
+          .gradesForms;
+        for (let j = 0; j < currentGrade.length; j++) {
+          newGrades.push({
+            idStudent: currentStudentId,
+            idCheckingForm: this.studentsData.checkingForms[j].id,
+            grade: currentGrade[j].form.value,
+          });
+        }
+      }
+      console.log(newGrades);
+
+    this.courseService
+      .updateGrades(this.id_course, newGrades)
+      .subscribe((data) => {
+        console.log(data);
+      });
+
 
     this.courseService
       .updatePresences(this.id_course, newPresences)
