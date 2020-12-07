@@ -3,8 +3,10 @@
 
       <div class="course" *ngFor="let course of coursesList">
 
-        <div (click)="listDetail(course.id)" color="" class="btn-hub">
-          <span class="course-list">{{ course.name }}</span>
+        <div (click)="listDetail(course.id)" color="" class="btn-hub listOfCourse">
+          <span class="course-list">{{ course.name }}</span> <br>
+          <span class="course-list">{{ course.time }} {{mapDay(course.day)}}</span>
+
         </div>
     </div>
   </div>

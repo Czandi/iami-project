@@ -1,10 +1,9 @@
 .container-content-small {
   margin-left: auto;
-  margin-right: auto;
   text-align: center;
-  width: 35vw;
+  width: 15vw;
   justify-content: center;
-  height: 60vh;
+  height: 20vh;
   background: linear-gradient(
     90deg,
     rgba(207, 211, 206, 0.2721463585434174) 100%,
@@ -14,6 +13,10 @@
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
   border: 1px solid #839b97;
+}
+
+ul {
+  list-style-type: none;
 }
 
 .overflowin-table {
@@ -56,7 +59,31 @@
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+.info{
+  margin-left: 1rem;
+  text-align: left;
+}
+
 .container-content-big {
+  margin-left: 1rem;
+  margin-right: auto;
+  text-align: center;
+  width: 30vw;
+  justify-content: center;
+  height: 60vh;
+  background: linear-gradient(
+    90deg,
+    rgba(207, 211, 206, 0.2721463585434174) 100%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.16);
+  border: 1px solid #839b97;
+  overflow-y: auto;
+}
+
+.container-content-big-margin {
   margin-left: auto;
   margin-right: auto;
   text-align: center;

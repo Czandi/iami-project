@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { CourseService } from '../../../../services/course.service';
 import { FormControl } from '@angular/forms';
 import { Presence } from '../../../../models/presence.model';
+import {DateMapper} from "../../../../shared/dateMapper";
 
 @Component({
   selector: 'app-single-course',
@@ -22,19 +23,21 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
   public presence: Presence[] = [];
   public isPresence: boolean = false;
   public isChecked: boolean = true;
+  public isCheckedDisplay: boolean = true;
   private isClicked: boolean = true;
+  public day: any;
 
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService
+    private courseService: CourseService,
   ) {}
 
   ngOnInit(): void {
     this.id_course = this.route.snapshot.paramMap.get('id');
 
     this.getStudentsData();
-
     this.getStudentsDataForms();
+    this.getCheckingsForNewPresences()
   }
 
   getCheckingsForNewPresences() {
@@ -42,11 +45,14 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
       .getCoursesById(this.id_course)
       .subscribe((data) => {
         this.course = data;
+        this.day = DateMapper.mapDayNumberToText(this.course.day);
+        if (this.isCheckedDisplay){
         for (let i = 0; i < this.course.students.length; i++) {
           this.newPresencesForms.push({
             bool: new FormControl(false),
           });
         }
+          this.isCheckedDisplay = false;}
       });
   }
 
@@ -95,8 +101,6 @@ export class SingleCourseComponent implements OnInit, OnDestroy {
           idGrade: '',
         });
       }
-
-      console.log(this.studentDataForms);
 
       for (let j = 0; j < currentData.grades.length; j++) {
         for (

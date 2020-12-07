@@ -11,7 +11,7 @@
 </div>
 
 <div *ngIf="isPresence && isChecked" class="flex-system">
-  <div class="container-content-small overflowin-table">
+  <div class="container-content-big-margin overflowin-table">
     <form action="">
       <table>
         <tr>
@@ -38,6 +38,16 @@
 </div>
 
 <div *ngIf="!isPresence" class="flex-system">
+  <div class="container-content-small">
+    <h3>Informacje o kursie</h3>
+    <div class="info">
+      Nazwa kursu: {{ course.name }}
+      <br>
+      Dzień zajęć: {{ day }}
+      <br>
+      Godzina zajęć: {{ course.time }}
+    </div>
+  </div>
   <div class="container-content-big">
     <div class="student-name-table">
       <table>
@@ -66,6 +76,7 @@
               <span class="line"></span>
             </span>
           </th>
+          <th>Srednia</th>
         </tr>
 
         <tr *ngFor="let studentData of studentsData.studentsData">
@@ -98,6 +109,7 @@
               value="true"
             ></mat-checkbox>
           </td>
+          <td>{{ studentData.averageGrade }}</td>
         </tr>
       </table>
     </div>

@@ -12,6 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class ListCourseComponent implements OnInit, OnDestroy {
   public coursesList;
   private courseServiceSub: Subscription;
+  public day: any;
 
   constructor(
     private courseService: CourseService,
@@ -25,6 +26,7 @@ export class ListCourseComponent implements OnInit, OnDestroy {
       .subscribe((data) => {
         this.coursesList = data;
       });
+    this.day = this.mapDay(this.coursesList.day);
   }
 
   ngOnDestroy(): void {
