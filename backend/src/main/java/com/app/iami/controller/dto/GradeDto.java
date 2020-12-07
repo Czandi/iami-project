@@ -13,6 +13,6 @@ import java.util.List;
 public class GradeDto {
 
     private Integer idCheckingForm;
-    private List<GradeResponse> grades;
+    private GradeResponse grade;
 
 }

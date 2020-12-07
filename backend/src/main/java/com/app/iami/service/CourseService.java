@@ -191,13 +191,18 @@ public class CourseService {
 
         List<StudentDataResponse> studentsData = allStudents.stream().map(student -> {
 
-            List<Grade> studentGrade = gradeService.findByStudentAndCourseOrderByCheckingForm(student, course);
-            List<Presence> studentPresence = presenceService.findByStudentAndCourseOrderByDate(student, course);
+            List<Grade> studentGrades = gradeService.findByStudentAndCourseOrderByCheckingForm(student, course);
+            List<Presence> studentPresences = presenceService.findByStudentAndCourseOrderByDate(student, course);
+
+            Boolean perfectPresence = checkIfStudentHasPerfectPresence(studentPresences);
+
+            Float averageGrade = getAverageGradeBasedOnPresence(studentGrades, perfectPresence);
 
             StudentDataResponse studentDataResponse = StudentDataResponse.builder()
                     .student(student)
-                    .grades(GradeMapper.mapToGradeDto(studentGrade))
-                    .presences(PresenceMapper.mapToPresenceDtos(studentPresence))
+                    .grades(GradeMapper.mapToGradeDto(studentGrades))
+                    .presences(PresenceMapper.mapToPresenceDtos(studentPresences))
+                    .averageGrade(averageGrade)
                     .build();
 
             return studentDataResponse;
@@ -210,6 +215,47 @@ public class CourseService {
                 .build();
 
         return studentDataDto;
+    }
+
+    public Float getAverageGradeBasedOnPresence(List<Grade> studentGrades, Boolean perfectPresence){
+        Float averageGrade = 0f;
+        if(studentGrades.size() > 0) {
+            Integer minGrade = Integer.parseInt(studentGrades.get(0).getGrade());
+            for (int i = 0; i < studentGrades.size(); i++) {
+                Integer grade = Integer.parseInt(studentGrades.get(i).getGrade());
+                averageGrade += grade;
+
+                if (grade < minGrade) {
+                    minGrade = grade;
+                }
+            }
+
+            if (perfectPresence && studentGrades.size() - 1 == 1) {
+                averageGrade -= minGrade;
+                System.out.println(averageGrade);
+            } else if (perfectPresence && studentGrades.size() - 1 > 1){
+                averageGrade -= minGrade;
+                averageGrade /= studentGrades.size();
+            } else {
+                averageGrade /= studentGrades.size();
+            }
+        }
+
+        return averageGrade;
+    }
+
+    public Boolean checkIfStudentHasPerfectPresence(List<Presence> presences){
+        Boolean perfectPresence = true;
+
+        for(int i = 0; i < presences.size(); i++){
+            Boolean presence = presences.get(i).isPresence();
+            if(presence == false){
+                perfectPresence = false;
+                break;
+            }
+        }
+
+        return perfectPresence;
     }
 
     public Boolean deletePresences(Integer idCourse, String date) {
