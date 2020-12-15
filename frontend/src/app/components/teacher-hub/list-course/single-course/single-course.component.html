@@ -3,7 +3,11 @@
     Wyświetl kurs
   </div>
 
-  <div *ngIf="isChecked" (click)="displayCourse()" class="btn-hub">
+  <div
+    *ngIf="isChecked && isCourseDay"
+    (click)="displayCourse()"
+    class="btn-hub"
+  >
     Sprawdź obecność
   </div>
 
@@ -42,9 +46,9 @@
     <h3>Informacje o kursie</h3>
     <div class="info">
       Nazwa kursu: {{ course.name }}
-      <br>
+      <br />
       Dzień zajęć: {{ day }}
-      <br>
+      <br />
       Godzina zajęć: {{ course.time }}
     </div>
   </div>
@@ -71,10 +75,10 @@
 
           <th class="col-width date" *ngFor="let date of studentsData.dates">
             {{ date }}
-            <span class="delete-button" (click)="deleteCol(date)">
+            <!-- <span class="delete-button" (click)="deleteCol(date)">
               <span class="line"></span>
               <span class="line"></span>
-            </span>
+            </span> -->
           </th>
           <th>Srednia</th>
         </tr>

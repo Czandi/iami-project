@@ -55,7 +55,7 @@ public class CourseService {
         Subject subject = subjectService.findById(newCourse.getIdSubject());
 
         Set<Student> students = new HashSet<>();
-        for(int i = 0; i < newCourse.getIdStudents().size(); i++){
+        for (int i = 0; i < newCourse.getIdStudents().size(); i++) {
             Integer id = newCourse.getIdStudents().get(i);
             Student student = studentService.findById(id);
             students.add(student);
@@ -78,7 +78,7 @@ public class CourseService {
         course = courseRepository.save(course);
         Set<CheckingForm> checkingForms = new HashSet<>();
 
-        for(int i = 0; i < newCourse.getCheckingForms().size(); i++){
+        for (int i = 0; i < newCourse.getCheckingForms().size(); i++) {
             CheckingFormRequest cf = newCourse.getCheckingForms().get(i);
             CheckingForm checkingForm = checkingFormService.insertCheckingForm(cf, course);
             checkingForms.add(checkingForm);
@@ -98,16 +98,16 @@ public class CourseService {
                 .subject(course.getSubject())
                 .teacher(teacherResponse)
                 .build();
-        
+
         return courseResponse;
     }
 
-    public void addEmptyGradesForStudents(Course course){
+    public void addEmptyGradesForStudents(Course course) {
         Set<CheckingForm> checkingForms = course.getCheckingForms();
         Set<Student> students = course.getStudents();
 
-        for(Student student: students){
-            for(CheckingForm checkingForm: checkingForms){
+        for (Student student : students) {
+            for (CheckingForm checkingForm : checkingForms) {
                 Grade grade = Grade.builder()
                         .grade("")
                         .course(course)
@@ -156,7 +156,7 @@ public class CourseService {
 
         Student student = studentService.findByNameAndSurname(name, surname);
 
-        if(student == null){
+        if (student == null) {
             student = Student.builder()
                     .name(name)
                     .surname(surname)
@@ -174,7 +174,7 @@ public class CourseService {
         return student;
     }
 
-    public Course findById(Integer id){
+    public Course findById(Integer id) {
         return courseRepository.findById(id).orElseThrow();
     }
 
@@ -236,38 +236,55 @@ public class CourseService {
         return studentDataDto;
     }
 
-    public Float getAverageGradeBasedOnPresence(List<Grade> studentGrades, Boolean perfectPresence){
+    public Float getAverageGradeBasedOnPresence(List<Grade> studentGrades, Boolean perfectPresence) {
         Float averageGrade = 0f;
-        if(studentGrades.size() > 0) {
-            Integer minGrade = Integer.parseInt(studentGrades.get(0).getGrade());
-            for (int i = 0; i < studentGrades.size(); i++) {
-                Integer grade = Integer.parseInt(studentGrades.get(i).getGrade());
-                averageGrade += grade;
+        if (studentGrades.size() > 0) {
 
-                if (grade < minGrade) {
-                    minGrade = grade;
+            String textGrade = studentGrades.get(0).getGrade();
+            int j = 0;
+
+            while (textGrade.equals("") && j < textGrade.length()) {
+                textGrade = studentGrades.get(j).getGrade();
+                j++;
+            }
+
+            if (!textGrade.equals("")) {
+                Integer minGrade = Integer.parseInt(textGrade);
+                for (int i = 0; i < studentGrades.size(); i++) {
+                    System.out.println("hello");
+                    if (!studentGrades.get(i).getGrade().equals("")) {
+                        Integer grade = Integer.parseInt(studentGrades.get(i).getGrade());
+                        averageGrade += grade;
+
+                        if (grade < minGrade) {
+                            minGrade = grade;
+                        }
+                    }
+                }
+
+                System.out.println(studentGrades.size());
+
+                if (perfectPresence && studentGrades.size() - 1 == 1) {
+                    averageGrade -= minGrade;
+                } else if (perfectPresence && studentGrades.size() - 1 > 1) {
+                    averageGrade -= minGrade;
+                    averageGrade /= studentGrades.size();
+                } else {
+                    averageGrade /= studentGrades.size();
                 }
             }
 
-            if (perfectPresence && studentGrades.size() - 1 == 1) {
-                averageGrade -= minGrade;
-            } else if (perfectPresence && studentGrades.size() - 1 > 1){
-                averageGrade -= minGrade;
-                averageGrade /= studentGrades.size();
-            } else {
-                averageGrade /= studentGrades.size();
-            }
         }
 
-        return averageGrade;
+        return Math.round(averageGrade * 100.0) / 100.0f;
     }
 
-    public Boolean checkIfStudentHasPerfectPresence(List<Presence> presences){
+    public Boolean checkIfStudentHasPerfectPresence(List<Presence> presences) {
         Boolean perfectPresence = true;
 
-        for(int i = 0; i < presences.size(); i++){
+        for (int i = 0; i < presences.size(); i++) {
             Boolean presence = presences.get(i).isPresence();
-            if(presence == false){
+            if (presence == false) {
                 perfectPresence = false;
                 break;
             }

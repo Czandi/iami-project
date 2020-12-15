@@ -51,7 +51,6 @@ export class CourseService {
   }
 
   public updateGrades(id: String, grades: Array<any>): Observable<any> {
-    return this.http.post(this.API_URL + '/' + id + '/grades', grades);
+    return this.http.put(this.API_URL + '/' + id + '/grades', grades);
   }
 }
-
