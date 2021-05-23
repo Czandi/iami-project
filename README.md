@@ -1,6 +1,6 @@
-# Lesson Journal
+# School Register
 
-Simple lesson journal application built in REST architecture with Spring Boot on the backend and Angular on the frontend.
+Simple school register application built in REST architecture with Spring Boot on the backend and Angular on the frontend.
 
 ## Features
 
